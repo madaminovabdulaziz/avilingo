@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing — AviLingo</title>
+    <meta name="description"
+        content="Simple, transparent pricing for aviation English training. Choose the plan that fits your goals.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Pricing Page Specific Styles */
+        .pricing-hero {
+            padding: calc(var(--space-3xl) + 60px) 0 var(--space-xl);
+            background: var(--color-white);
+            text-align: center;
+        }
+
+        .pricing-hero h1 {
+            margin-bottom: var(--space-sm);
+        }
+
+        .pricing-hero p {
+            font-size: 1.125rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Billing Toggle */
+        .billing-toggle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+
+        .billing-toggle span {
+            font-size: 0.9375rem;
+            color: var(--color-gray-400);
+            transition: color 0.2s ease;
+        }
+
+        .billing-toggle span.active {
+            color: var(--color-black);
+            font-weight: 600;
+        }
+
+        .toggle-switch {
+            width: 50px;
+            height: 28px;
+            background: var(--color-gray-200);
+            border-radius: 14px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .toggle-switch.active {
+            background: var(--color-black);
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 22px;
+            height: 22px;
+            background: var(--color-white);
+            border-radius: 50%;
+            transition: transform 0.2s ease;
+        }
+
+        .toggle-switch.active::after {
+            transform: translateX(22px);
+        }
+
+        .save-badge {
+            background: var(--color-accent);
+            color: var(--color-white);
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-lg);
+            padding: var(--space-2xl) 0 var(--space-3xl);
+        }
+
+        .pricing-card {
+            border: 2px solid var(--color-gray-200);
+            padding: var(--space-xl);
+            text-align: center;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .pricing-card:hover {
+            border-color: var(--color-black);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--color-black);
+            background: var(--color-gray-100);
+        }
+
+        .pricing-card.featured::before {
+            content: attr(data-badge);
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--color-black);
+            color: var(--color-white);
+            padding: 0.25rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .plan-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-gray-600);
+            margin-bottom: var(--space-sm);
+        }
+
+        .plan-price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--color-black);
+            line-height: 1;
+            margin-bottom: var(--space-xs);
+        }
+
+        .plan-price span {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--color-gray-600);
+        }
+
+        .plan-price-annual {
+            display: none;
+        }
+
+        .annual-billing .plan-price-monthly {
+            display: none;
+        }
+
+        .annual-billing .plan-price-annual {
+            display: block;
+        }
+
+        .plan-original-price {
+            font-size: 0.875rem;
+            color: var(--color-gray-400);
+            text-decoration: line-through;
+            margin-bottom: var(--space-xs);
+            min-height: 1.25rem;
+        }
+
+        .plan-savings {
+            display: inline-block;
+            background: var(--color-accent);
+            color: var(--color-white);
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .annual-billing .plan-savings {
+            opacity: 1;
+        }
+
+        .plan-desc {
+            font-size: 0.9375rem;
+            color: var(--color-gray-600);
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-lg);
+            border-bottom: 1px solid var(--color-gray-200);
+        }
+
+        .plan-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: var(--space-lg);
+        }
+
+        .plan-features li {
+            padding: 0.5rem 0;
+            font-size: 0.9375rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .plan-features li::before {
+            content: '✓';
+            color: var(--color-accent);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .plan-cta {
+            width: 100%;
+            padding: 1rem;
+            font-family: var(--font-family);
+            font-size: 1rem;
+            font-weight: 600;
+            background: var(--color-black);
+            color: var(--color-white);
+            border: 2px solid var(--color-black);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .plan-cta:hover {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+
+        .coming-soon-badge {
+            display: inline-block;
+            background: var(--color-accent);
+            color: var(--color-white);
+            padding: 0.5rem 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: var(--space-lg);
+        }
+
+        .guarantee {
+            text-align: center;
+            padding: var(--space-xl) 0;
+            border-top: 1px solid var(--color-gray-200);
+        }
+
+        .guarantee p {
+            font-size: 0.9375rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-black);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: var(--space-lg);
+        }
+
+        .back-link:hover {
+            color: var(--color-accent);
+        }
+
+        @media (max-width: 900px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="logo">AviLingo</a>
+            <div class="lang-toggle">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="ru">RU</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Pricing Hero -->
+    <section class="pricing-hero">
+        <div class="container">
+            <a href="index.html" class="back-link">← <span data-en="Back to Home" data-ru="На главную">Back to
+                    Home</span></a>
+            <span class="coming-soon-badge" data-en="Coming Soon" data-ru="Скоро">Coming Soon</span>
+            <h1 data-en="Simple, Transparent Pricing" data-ru="Простые и прозрачные тарифы">Simple, Transparent Pricing
+            </h1>
+            <p data-en="Choose the plan that fits your ICAO preparation timeline"
+                data-ru="Выберите план, который соответствует вашему графику подготовки к ICAO">Choose the plan that
+                fits your ICAO preparation timeline</p>
+
+            <!-- Billing Toggle -->
+            <div class="billing-toggle">
+                <span class="toggle-monthly active" data-en="Monthly" data-ru="Ежемесячно">Monthly</span>
+                <div class="toggle-switch" id="billing-toggle"></div>
+                <span class="toggle-annual" data-en="Annual" data-ru="Ежегодно">Annual</span>
+                <span class="save-badge" data-en="Save 35%" data-ru="Скидка 35%">Save 35%</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Cards -->
+    <section class="container" id="pricing-section">
+        <div class="pricing-grid">
+            <!-- Basic Plan -->
+            <div class="pricing-card">
+                <p class="plan-name" data-en="Basic" data-ru="Базовый">Basic</p>
+                <p class="plan-original-price"></p>
+                <p class="plan-price plan-price-monthly">$9<span data-en="/month" data-ru="/мес">/month</span></p>
+                <p class="plan-price plan-price-annual">$79<span data-en="/year" data-ru="/год">/year</span></p>
+                <span class="plan-savings" data-en="Save $29/year" data-ru="Экономия $29/год">Save $29/year</span>
+                <p class="plan-desc" data-en="For beginners preparing for first ICAO test"
+                    data-ru="Для начинающих, готовящихся к первому тесту ICAO">For beginners preparing for first ICAO
+                    test</p>
+                <ul class="plan-features">
+                    <li data-en="200 aviation vocabulary cards" data-ru="200 карточек авиационной лексики">200
+                        aviation vocabulary cards</li>
+                    <li data-en="10 listening exercises" data-ru="10 упражнений на аудирование">10 listening exercises
+                    </li>
+                    <li data-en="Progress tracking" data-ru="Отслеживание прогресса">Progress tracking</li>
+                    <li data-en="Mobile app access" data-ru="Доступ к мобильному приложению">Mobile app access</li>
+                </ul>
+                <button class="plan-cta" onclick="alert('Coming soon!')" data-en="Join Waitlist"
+                    data-ru="В список ожидания">Join Waitlist</button>
+            </div>
+
+            <!-- Pro Plan -->
+            <div class="pricing-card featured" data-badge="Most Popular">
+                <p class="plan-name" data-en="Pro" data-ru="Про">Pro</p>
+                <p class="plan-original-price"></p>
+                <p class="plan-price plan-price-monthly">$19<span data-en="/month" data-ru="/мес">/month</span></p>
+                <p class="plan-price plan-price-annual">$149<span data-en="/year" data-ru="/год">/year</span></p>
+                <span class="plan-savings" data-en="Save $79/year" data-ru="Экономия $79/год">Save $79/year</span>
+                <p class="plan-desc" data-en="For serious pilots targeting Level 5+"
+                    data-ru="Для серьёзных пилотов, целящихся на Level 5+">For serious pilots targeting Level 5+</p>
+                <ul class="plan-features">
+                    <li data-en="500+ aviation vocabulary cards" data-ru="500+ карточек авиационной лексики">500+
+                        aviation vocabulary cards</li>
+                    <li data-en="Unlimited listening exercises" data-ru="Неограниченные упражнения на аудирование">
+                        Unlimited listening exercises</li>
+                    <li data-en="AI speech feedback" data-ru="ИИ-анализ речи">AI speech feedback</li>
+                    <li data-en="Real ATC audio library" data-ru="Библиотека записей ATC">Real ATC audio library</li>
+                    <li data-en="Mock test simulations" data-ru="Пробные тесты">Mock test simulations</li>
+                    <li data-en="Scenario practice" data-ru="Практика сценариев">Scenario practice</li>
+                </ul>
+                <button class="plan-cta" onclick="alert('Coming soon!')" data-en="Join Waitlist"
+                    data-ru="В список ожидания">Join Waitlist</button>
+            </div>
+
+            <!-- Lifetime Plan -->
+            <div class="pricing-card">
+                <p class="plan-name" data-en="Lifetime" data-ru="Навсегда">Lifetime</p>
+                <p class="plan-original-price">$456</p>
+                <p class="plan-price">$249<span data-en=" once" data-ru=" разово"> once</span></p>
+                <span class="plan-savings" style="opacity: 1;" data-en="Save $207" data-ru="Экономия $207">Save
+                    $207</span>
+                <p class="plan-desc" data-en="Pay once, access forever — best value"
+                    data-ru="Оплатите один раз, пользуйтесь всегда">Pay once, access forever — best value</p>
+                <ul class="plan-features">
+                    <li data-en="Everything in Pro" data-ru="Всё из про плана">Everything in Pro</li>
+                    <li data-en="Lifetime updates" data-ru="Пожизненные обновления">Lifetime updates</li>
+                    <li data-en="Priority support" data-ru="Приоритетная поддержка">Priority support</li>
+                    <li data-en="Early access to new features" data-ru="Ранний доступ к новым функциям">Early access to
+                        new features</li>
+                    <li data-en="Certificate of completion" data-ru="Сертификат о прохождении">Certificate of completion
+                    </li>
+                </ul>
+                <button class="plan-cta" onclick="alert('Coming soon!')" data-en="Join Waitlist"
+                    data-ru="В список ожидания">Join Waitlist</button>
+            </div>
+        </div>
+
+        <div class="guarantee">
+            <p data-en="🔒 7-day money-back guarantee. No questions asked."
+                data-ru="🔒 7-дневная гарантия возврата. Без лишних вопросов.">🔒 7-day money-back guarantee. No
+                questions asked.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">AviLingo</div>
+                <p class="footer-tagline" data-en="Aviation English. Simplified."
+                    data-ru="Авиационный английский. Просто.">Aviation English. Simplified.</p>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 AviLingo. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Billing toggle functionality
+        const billingToggle = document.getElementById('billing-toggle');
+        const pricingSection = document.getElementById('pricing-section');
+        const toggleMonthly = document.querySelector('.toggle-monthly');
+        const toggleAnnual = document.querySelector('.toggle-annual');
+
+        billingToggle.addEventListener('click', () => {
+            billingToggle.classList.toggle('active');
+            pricingSection.classList.toggle('annual-billing');
+            toggleMonthly.classList.toggle('active');
+            toggleAnnual.classList.toggle('active');
+        });
+    </script>
+</body>
+
+</html>

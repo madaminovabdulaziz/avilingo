@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AviLingo — Pass Your ICAO English Test</title>
+    <meta name="description"
+        content="AI-powered aviation English training. Pass ICAO Level 4-6 with 15 minutes of daily practice. Real ATC audio. Speech recognition feedback.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="AviLingo — Aviation English Training">
+    <meta property="og:description" content="Pass your ICAO English test with AI-powered practice. 15 minutes a day.">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Language Toggle -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="logo">AviLingo</div>
+            <div class="lang-toggle">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="ru">RU</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="ai-badge" data-en="AI-Powered" data-ru="На базе ИИ">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                        </svg>
+                        <span>AI-Powered</span>
+                    </div>
+                    <p class="hero-label" data-en="Aviation English Training" data-ru="Авиационный английский">Aviation
+                        English Training</p>
+                    <h1 class="hero-title" data-en="Pass Your ICAO English Test"
+                        data-ru="Сдайте тест ICAO по английскому">Pass Your ICAO English Test</h1>
+                    <p class="hero-subtitle" data-en="AI speech coach. Real-time feedback. 15 min/day."
+                        data-ru="ИИ-коуч по речи. Обратная связь в реальном времени. 15 мин/день.">AI speech coach.
+                        Real-time feedback. 15 min/day.</p>
+
+                    <form class="email-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                        <input type="email" name="email" placeholder="Enter your email"
+                            data-placeholder-en="Enter your email" data-placeholder-ru="Введите ваш email" required>
+                        <button type="submit" data-en="Join Waitlist" data-ru="Записаться">Join Waitlist</button>
+                    </form>
+                    <p class="form-note" data-en="Early access: 50% off forever"
+                        data-ru="Ранний доступ: скидка 50% навсегда">Early access: 50% off forever</p>
+
+                    <div class="waitlist-counter">
+                        <span class="counter-number" data-target="250">0</span>
+                        <span class="counter-text" data-en="pilots already on the waitlist"
+                            data-ru="пилотов уже в списке ожидания">pilots already on the waitlist</span>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="images/hero-image.png" alt="Professional pilot in cockpit">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Trust Badges - Regulatory Bodies -->
+    <section class="trust-section">
+        <div class="container">
+            <p class="trust-label" data-en="Recognized by international aviation standards"
+                data-ru="Признано международными авиационными стандартами">Recognized by international aviation
+                standards</p>
+            <div class="trust-logos">
+                <div class="logo-item">
+                    <img src="images/logos/icao.svg" alt="ICAO" loading="lazy">
+                    <span>ICAO</span>
+                </div>
+                <div class="logo-item">
+                    <img src="images/logos/iata.svg" alt="IATA" loading="lazy">
+                    <span>IATA</span>
+                </div>
+                <div class="logo-item">
+                    <img src="images/logos/easa.svg" alt="EASA" loading="lazy">
+                    <span>EASA</span>
+                </div>
+                <div class="logo-item">
+                    <img src="images/logos/faa.svg" alt="FAA" loading="lazy">
+                    <span>FAA</span>
+                </div>
+                <div class="logo-item">
+                    <img src="images/logos/caa.svg" alt="CAA" loading="lazy">
+                    <span>CAA</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Airlines Marquee -->
+    <section class="airlines-section">
+        <div class="container">
+            <p class="airlines-label" data-en="Join pilots flying for leading airlines worldwide"
+                data-ru="Присоединяйтесь к пилотам ведущих авиакомпаний мира">Join pilots flying for leading airlines
+                worldwide</p>
+        </div>
+        <div class="airlines-marquee">
+            <div class="marquee-track">
+                <!-- First set -->
+                <div class="airline-logo featured"><img src="images/logos/uzbekistan.svg" alt="Uzbekistan Airways">
+                </div>
+                <div class="airline-logo"><img src="images/logos/emirates.svg" alt="Emirates"></div>
+                <div class="airline-logo"><img src="images/logos/lufthansa.svg" alt="Lufthansa"></div>
+                <div class="airline-logo"><img src="images/logos/qatar.svg" alt="Qatar Airways"></div>
+                <div class="airline-logo"><img src="images/logos/singapore.svg" alt="Singapore Airlines"></div>
+                <div class="airline-logo"><img src="images/logos/turkish.svg" alt="Turkish Airlines"></div>
+                <div class="airline-logo"><img src="images/logos/cathay.svg" alt="Cathay Pacific"></div>
+                <div class="airline-logo"><img src="images/logos/etihad.svg" alt="Etihad"></div>
+                <div class="airline-logo"><img src="images/logos/british.svg" alt="British Airways"></div>
+                <!-- Duplicate for seamless loop -->
+                <div class="airline-logo featured"><img src="images/logos/uzbekistan.svg" alt="Uzbekistan Airways">
+                </div>
+                <div class="airline-logo"><img src="images/logos/emirates.svg" alt="Emirates"></div>
+                <div class="airline-logo"><img src="images/logos/lufthansa.svg" alt="Lufthansa"></div>
+                <div class="airline-logo"><img src="images/logos/qatar.svg" alt="Qatar Airways"></div>
+                <div class="airline-logo"><img src="images/logos/singapore.svg" alt="Singapore Airlines"></div>
+                <div class="airline-logo"><img src="images/logos/turkish.svg" alt="Turkish Airlines"></div>
+                <div class="airline-logo"><img src="images/logos/cathay.svg" alt="Cathay Pacific"></div>
+                <div class="airline-logo"><img src="images/logos/etihad.svg" alt="Etihad"></div>
+                <div class="airline-logo"><img src="images/logos/british.svg" alt="British Airways"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problems">
+        <div class="container">
+            <h2 class="section-title" data-en="The Problem" data-ru="Проблема">The Problem</h2>
+
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <span class="problem-number">01</span>
+                    <h3 data-en="Mandatory Retesting" data-ru="Обязательная пересдача">Mandatory Retesting</h3>
+                    <p data-en="ICAO Level 4 expires every 3-4 years. Miss your score and you're grounded."
+                        data-ru="ICAO Level 4 истекает каждые 3-4 года. Не сдал — не летаешь.">ICAO Level 4 expires
+                        every 3-4 years. Miss your score and you're grounded.</p>
+                </div>
+
+                <div class="problem-card">
+                    <span class="problem-number">02</span>
+                    <h3 data-en="Outdated Prep Materials" data-ru="Устаревшие материалы">Outdated Prep Materials</h3>
+                    <p data-en="Existing courses are expensive ($300-500), desktop-only, and lack modern AI practice."
+                        data-ru="Курсы дорогие ($300-500), только для ПК, без современных ИИ-технологий.">Existing
+                        courses are expensive ($300-500), desktop-only, and lack modern AI practice.</p>
+                </div>
+
+                <div class="problem-card">
+                    <span class="problem-number">03</span>
+                    <h3 data-en="Accent Anxiety" data-ru="Страх акцента">Accent Anxiety</h3>
+                    <p data-en="Non-native speakers struggle with pronunciation feedback. No app gives real-time correction."
+                        data-ru="Неносителям сложно с произношением. Ни одно приложение не даёт обратную связь.">
+                        Non-native speakers struggle with pronunciation feedback. No app gives real-time correction.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution">
+        <div class="container">
+            <h2 class="section-title" data-en="The Solution" data-ru="Решение">The Solution</h2>
+            <p class="section-subtitle" data-en="Modern mobile app designed for busy pilots"
+                data-ru="Мобильное приложение для занятых пилотов">Modern mobile app designed for busy pilots</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <img src="images/vocabulary-screen.png" alt="Vocabulary flashcard interface">
+                    </div>
+                    <div class="feature-content">
+                        <span class="feature-label" data-en="Vocabulary" data-ru="Словарь">Vocabulary</span>
+                        <h3 data-en="500+ Aviation Terms" data-ru="500+ терминов">500+ Aviation Terms</h3>
+                        <p data-en="Spaced repetition flashcards. Audio pronunciation. Real context sentences."
+                            data-ru="Интервальные карточки. Аудио произношение. Реальные примеры.">Spaced repetition
+                            flashcards. Audio pronunciation. Real context sentences.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card reverse">
+                    <div class="feature-image">
+                        <img src="images/listening-screen.png" alt="Listening exercise interface">
+                    </div>
+                    <div class="feature-content">
+                        <span class="feature-label" data-en="Listening" data-ru="Аудирование">Listening</span>
+                        <h3 data-en="Real ATC Audio" data-ru="Реальные записи ATC">Real ATC Audio</h3>
+                        <p data-en="Various accents: American, British, Indian, Chinese. Adjustable speed. Transcription practice."
+                            data-ru="Разные акценты: американский, британский, индийский, китайский. Регулировка скорости.">
+                            Various accents: American, British, Indian, Chinese. Adjustable speed. Transcription
+                            practice.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <img src="images/speaking-screen.png" alt="Speaking practice interface">
+                    </div>
+                    <div class="feature-content">
+                        <span class="feature-label" data-en="Speaking" data-ru="Разговорный">Speaking</span>
+                        <h3 data-en="AI Pronunciation Feedback" data-ru="ИИ-оценка произношения">AI Pronunciation
+                            Feedback</h3>
+                        <p data-en="Record yourself. Get instant feedback on pronunciation, fluency, and vocabulary."
+                            data-ru="Запишите себя. Получите мгновенную оценку произношения, беглости и лексики.">Record
+                            yourself. Get instant feedback on pronunciation, fluency, and vocabulary.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title" data-en="15 Minutes a Day" data-ru="15 минут в день">15 Minutes a Day</h2>
+
+            <div class="steps-grid">
+                <div class="step">
+                    <span class="step-time">5 min</span>
+                    <h3 data-en="Vocabulary Review" data-ru="Повторение слов">Vocabulary Review</h3>
+                    <p data-en="Smart flashcards that adapt to what you don't know"
+                        data-ru="Умные карточки, которые адаптируются под вас">Smart flashcards that adapt to what you
+                        don't know</p>
+                </div>
+
+                <div class="step-arrow">→</div>
+
+                <div class="step">
+                    <span class="step-time">5 min</span>
+                    <h3 data-en="Listening Exercise" data-ru="Аудирование">Listening Exercise</h3>
+                    <p data-en="Real ATC communications with comprehension questions"
+                        data-ru="Реальные переговоры ATC с вопросами на понимание">Real ATC communications with
+                        comprehension questions</p>
+                </div>
+
+                <div class="step-arrow">→</div>
+
+                <div class="step">
+                    <span class="step-time">5 min</span>
+                    <h3 data-en="Speaking Practice" data-ru="Разговорная практика">Speaking Practice</h3>
+                    <p data-en="Record phraseology or describe a scenario"
+                        data-ru="Запишите фразеологию или опишите ситуацию">Record phraseology or describe a scenario
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ICAO Levels -->
+    <section class="levels">
+        <div class="container">
+            <h2 class="section-title" data-en="ICAO Proficiency Levels" data-ru="Уровни ICAO">ICAO Proficiency Levels
+            </h2>
+
+            <div class="levels-table">
+                <div class="level-row header">
+                    <span data-en="Level" data-ru="Уровень">Level</span>
+                    <span data-en="Name" data-ru="Название">Name</span>
+                    <span data-en="Validity" data-ru="Срок">Validity</span>
+                    <span data-en="Requirement" data-ru="Требование">Requirement</span>
+                </div>
+                <div class="level-row">
+                    <span class="level-badge">4</span>
+                    <span data-en="Operational" data-ru="Рабочий">Operational</span>
+                    <span data-en="3-4 years" data-ru="3-4 года">3-4 years</span>
+                    <span data-en="Minimum for international" data-ru="Минимум для международных рейсов">Minimum for
+                        international</span>
+                </div>
+                <div class="level-row highlight">
+                    <span class="level-badge">5</span>
+                    <span data-en="Extended" data-ru="Продвинутый">Extended</span>
+                    <span data-en="6 years" data-ru="6 лет">6 years</span>
+                    <span data-en="Preferred by airlines" data-ru="Предпочитают авиакомпании">Preferred by
+                        airlines</span>
+                </div>
+                <div class="level-row">
+                    <span class="level-badge">6</span>
+                    <span data-en="Expert" data-ru="Эксперт">Expert</span>
+                    <span data-en="Lifetime" data-ru="Бессрочно">Lifetime</span>
+                    <span data-en="Native-level proficiency" data-ru="Уровень носителя">Native-level proficiency</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="proof">
+        <div class="container">
+            <div class="proof-content">
+                <blockquote>
+                    <p data-en="Built by pilots who understand the challenge of aviation English testing. We've been through the stress of retesting — now we're building the tool we wished existed."
+                        data-ru="Создано пилотами, которые понимают сложности тестирования авиационного английского. Мы сами проходили стресс пересдачи — теперь создаём инструмент, которого нам не хватало.">
+                        Built by pilots who understand the challenge of aviation English testing. We've been through the
+                        stress of retesting — now we're building the tool we wished existed.</p>
+                </blockquote>
+                <div class="proof-stats">
+                    <div class="stat">
+                        <span class="stat-number">6</span>
+                        <span class="stat-label" data-en="ICAO criteria covered" data-ru="критериев ICAO">ICAO criteria
+                            covered</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label" data-en="aviation terms" data-ru="авиационных терминов">aviation
+                            terms</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label" data-en="listening exercises" data-ru="упражнений">listening
+                            exercises</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="cta">
+        <div class="container">
+            <h2 class="cta-title" data-en="Ready to Prepare for Your ICAO Test?"
+                data-ru="Готовы подготовиться к тесту ICAO?">Ready to Prepare for Your ICAO Test?</h2>
+            <p class="cta-subtitle" data-en="Join the waitlist. Get early access at 50% off."
+                data-ru="Присоединяйтесь к списку ожидания. Получите скидку 50%.">Join the waitlist. Get early access at
+                50% off.</p>
+
+            <form class="email-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <input type="email" name="email" placeholder="Enter your email" data-placeholder-en="Enter your email"
+                    data-placeholder-ru="Введите ваш email" required>
+                <input type="hidden" name="source" value="footer_cta">
+                <button type="submit" data-en="Join Waitlist" data-ru="Записаться">Join Waitlist</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">AviLingo</div>
+                <p class="footer-tagline" data-en="Aviation English. Simplified."
+                    data-ru="Авиационный английский. Просто.">Aviation English. Simplified.</p>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 AviLingo. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Survey Modal -->
+    <div id="survey-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 data-en="Quick Survey" data-ru="Быстрый опрос">Quick Survey</h3>
+                <p data-en="Help us build the perfect app for you (30 seconds)"
+                    data-ru="Помогите нам создать идеальное приложение (30 секунд)">Help us build the perfect app for
+                    you (30 seconds)</p>
+            </div>
+
+            <form id="survey-form">
+                <div class="form-group">
+                    <label data-en="What's your current ICAO level?" data-ru="Ваш текущий уровень ICAO?">What's your
+                        current ICAO level?</label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="icao_level" value="none" required>
+                            <span data-en="Not tested yet" data-ru="Ещё не сдавал">Not tested yet</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="icao_level" value="4">
+                            <span>Level 4</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="icao_level" value="5">
+                            <span>Level 5</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="icao_level" value="6">
+                            <span>Level 6</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label data-en="When is your next test?" data-ru="Когда следующий тест?">When is your next
+                        test?</label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="test_timeline" value="1-3months" required>
+                            <span data-en="1-3 months" data-ru="1-3 месяца">1-3 months</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="test_timeline" value="3-6months">
+                            <span data-en="3-6 months" data-ru="3-6 месяцев">3-6 months</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="test_timeline" value="6+months">
+                            <span data-en="6+ months" data-ru="6+ месяцев">6+ months</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="test_timeline" value="unsure">
+                            <span data-en="Not sure yet" data-ru="Пока не знаю">Not sure yet</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label data-en="Monthly budget for training?" data-ru="Месячный бюджет на обучение?">Monthly budget
+                        for training?</label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="budget" value="$5-15" required>
+                            <span>$5 - $15</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="budget" value="$15-30">
+                            <span>$15 - $30</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="budget" value="$30+">
+                            <span>$30+</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label data-en="Your country" data-ru="Ваша страна">Your country</label>
+                    <select name="country" required>
+                        <option value="" data-en="Select country" data-ru="Выберите страну">Select country</option>
+                        <option value="Uzbekistan">Uzbekistan</option>
+                        <option value="Kazakhstan">Kazakhstan</option>
+                        <option value="Russia">Russia</option>
+                        <option value="UAE">UAE</option>
+                        <option value="Turkey">Turkey</option>
+                        <option value="India">India</option>
+                        <option value="China">China</option>
+                        <option value="Indonesia">Indonesia</option>
+                        <option value="Philippines">Philippines</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="survey-submit" data-en="Submit & Get Early Access"
+                    data-ru="Отправить и получить ранний доступ">Submit & Get Early Access</button>
+                <button type="button" class="survey-skip" id="skip-survey" data-en="Skip for now"
+                    data-ru="Пропустить">Skip for now</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Thank You Modal -->
+    <div id="thankyou-modal" class="modal">
+        <div class="modal-content thankyou">
+            <div class="thankyou-icon">✓</div>
+            <h3 data-en="You're on the list!" data-ru="Вы в списке!">You're on the list!</h3>
+            <p data-en="We'll notify you when AviLingo launches. Check your email for confirmation."
+                data-ru="Мы уведомим вас о запуске AviLingo. Проверьте почту.">We'll notify you when AviLingo launches.
+                Check your email for confirmation.</p>
+            <a href="pricing.html" class="btn-primary" data-en="View Pricing Plans" data-ru="Посмотреть тарифы">View
+                Pricing Plans</a>
+            <button class="modal-close" id="close-thankyou" data-en="Close" data-ru="Закрыть">Close</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
