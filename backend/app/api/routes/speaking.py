@@ -7,8 +7,11 @@ Endpoints:
 - GET /speaking/stats - Get user's speaking statistics
 - GET /speaking/scenarios/{id} - Get scenario details
 - POST /speaking/scenarios/{id}/submit - Upload audio recording
+- POST /speaking/scenarios/{id}/upload-url - Get presigned URL for direct upload
+- POST /speaking/scenarios/{id}/confirm-upload - Confirm direct upload completed
 - GET /speaking/submissions/{id} - Get submission with feedback
 - GET /speaking/submissions/{id}/status - Check processing status
+- POST /speaking/submissions/{id}/retry - Retry failed submission
 - GET /speaking/submissions - List user's submissions
 """
 
@@ -590,6 +593,100 @@ async def get_submission_status(
         )
     
     return status_obj
+
+
+# =============================================================================
+# Retry Failed Submission
+# =============================================================================
+
+@router.post(
+    "/submissions/{submission_id}/retry",
+    response_model=SpeakingSubmissionStatus,
+    summary="Retry failed submission",
+    description="Retry processing a failed submission."
+)
+async def retry_submission(
+    submission_id: str,
+    user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """
+    Retry processing a failed submission.
+    
+    **Requirements:**
+    - Submission must be in 'failed' status
+    - Must be a retryable error (not all errors can be retried)
+    - Must not exceed max retry limit (3 attempts)
+    
+    **Returns:**
+    - Updated status with status set back to 'pending'
+    """
+    # Get submission
+    submission = db.execute(
+        select(SpeakingSubmission).where(
+            SpeakingSubmission.id == submission_id,
+            SpeakingSubmission.user_id == user.id
+        )
+    ).scalar_one_or_none()
+    
+    if not submission:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Submission not found"
+        )
+    
+    # Check if retry is allowed
+    if submission.status != SubmissionStatus.FAILED:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Cannot retry submission with status '{submission.status.value}'. Only failed submissions can be retried."
+        )
+    
+    # Define retryable errors
+    RETRYABLE_ERRORS = {
+        "AUDIO_DOWNLOAD_FAILED",
+        "TRANSCRIPTION_FAILED",
+        "AI_FEEDBACK_FAILED",
+        "PROCESSING_TIMEOUT",
+        "UNKNOWN_ERROR",
+    }
+    
+    error_code = submission.error_code
+    if error_code and error_code not in RETRYABLE_ERRORS:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"This error cannot be retried. Please record a new response. Error: {submission.error_message}"
+        )
+    
+    # Check retry limit
+    max_retries = submission.max_retries if hasattr(submission, 'max_retries') else 3
+    retry_count = submission.retry_count or 0
+    
+    if retry_count >= max_retries:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Maximum retry limit reached ({max_retries}). Please record a new response."
+        )
+    
+    # Reset status to pending
+    submission.status = SubmissionStatus.PENDING
+    submission.error_message = None
+    submission.error_code = None
+    submission.processed_at = None
+    # Note: retry_count is incremented in _mark_failed, not here
+    db.commit()
+    
+    # Trigger background processing
+    try:
+        from app.worker.tasks.speaking_processor import trigger_processing
+        trigger_processing.delay(str(submission.id))
+        logger.info(f"Retry triggered for submission {submission.id} (attempt {retry_count + 1})")
+    except Exception as e:
+        logger.warning(f"Failed to queue retry processing: {e}")
+    
+    # Return updated status
+    service = SpeakingService(db)
+    return service.get_submission_status(submission_id, user.id)
 
 
 # =============================================================================

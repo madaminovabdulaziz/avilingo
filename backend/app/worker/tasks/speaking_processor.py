@@ -73,7 +73,11 @@ def process_submission(self, submission_id: str) -> dict:
         # Get scenario details
         scenario = db.get(SpeakingScenario, submission.scenario_id)
         if not scenario:
-            _mark_failed(db, submission, "Scenario not found")
+            _mark_failed(
+                db, submission, 
+                "Scenario not found",
+                error_code=ErrorCodes.SCENARIO_NOT_FOUND
+            )
             return {"success": False, "error": "Scenario not found"}
         
         # Update status to processing
@@ -98,7 +102,11 @@ def process_submission(self, submission_id: str) -> dict:
             duration = transcription_result.duration_seconds
             
             if not transcript or len(transcript.strip()) < 3:
-                _mark_failed(db, submission, "Transcription produced no usable text")
+                _mark_failed(
+                    db, submission, 
+                    "Transcription produced no usable text",
+                    error_code=ErrorCodes.TRANSCRIPTION_EMPTY
+                )
                 return {"success": False, "error": "Empty transcription"}
             
             logger.info(
@@ -174,9 +182,14 @@ def process_submission(self, submission_id: str) -> dict:
         try:
             submission = db.get(SpeakingSubmission, submission_id)
             if submission and submission.status != SubmissionStatus.COMPLETED:
-                _mark_failed(db, submission, str(e)[:500])
-        except Exception:
-            pass
+                error_code = _get_error_code_from_exception(e)
+                _mark_failed(
+                    db, submission, 
+                    str(e)[:500],
+                    error_code=error_code
+                )
+        except Exception as mark_error:
+            logger.exception(f"Failed to mark submission as failed: {mark_error}")
         
         raise
         
@@ -272,19 +285,124 @@ def cleanup_stale_submissions() -> dict:
 
 
 # =============================================================================
+# Error Codes and User-Friendly Messages
+# =============================================================================
+
+class ErrorCodes:
+    """Machine-readable error codes for frontend handling."""
+    AUDIO_NOT_FOUND = "AUDIO_NOT_FOUND"
+    AUDIO_DOWNLOAD_FAILED = "AUDIO_DOWNLOAD_FAILED"
+    TRANSCRIPTION_FAILED = "TRANSCRIPTION_FAILED"
+    TRANSCRIPTION_EMPTY = "TRANSCRIPTION_EMPTY"
+    AI_FEEDBACK_FAILED = "AI_FEEDBACK_FAILED"
+    SCENARIO_NOT_FOUND = "SCENARIO_NOT_FOUND"
+    PROCESSING_TIMEOUT = "PROCESSING_TIMEOUT"
+    UNKNOWN_ERROR = "UNKNOWN_ERROR"
+
+
+# Map error codes to user-friendly messages
+ERROR_MESSAGES = {
+    ErrorCodes.AUDIO_NOT_FOUND: "We couldn't find your audio recording. Please try recording again.",
+    ErrorCodes.AUDIO_DOWNLOAD_FAILED: "Failed to download your recording. Please check your internet and try again.",
+    ErrorCodes.TRANSCRIPTION_FAILED: "We had trouble transcribing your audio. Please ensure you spoke clearly and try again.",
+    ErrorCodes.TRANSCRIPTION_EMPTY: "We couldn't detect any speech in your recording. Please try again and speak clearly.",
+    ErrorCodes.AI_FEEDBACK_FAILED: "Our AI feedback system is temporarily unavailable. Your submission has been saved and will be processed shortly.",
+    ErrorCodes.SCENARIO_NOT_FOUND: "This practice scenario is no longer available.",
+    ErrorCodes.PROCESSING_TIMEOUT: "Processing took too long. Please try again.",
+    ErrorCodes.UNKNOWN_ERROR: "An unexpected error occurred. Please try again or contact support.",
+}
+
+# Which errors allow retry
+RETRYABLE_ERRORS = {
+    ErrorCodes.AUDIO_DOWNLOAD_FAILED,
+    ErrorCodes.TRANSCRIPTION_FAILED,
+    ErrorCodes.AI_FEEDBACK_FAILED,
+    ErrorCodes.PROCESSING_TIMEOUT,
+    ErrorCodes.UNKNOWN_ERROR,
+}
+
+# Suggested user actions
+USER_ACTIONS = {
+    ErrorCodes.AUDIO_NOT_FOUND: "Record a new response",
+    ErrorCodes.AUDIO_DOWNLOAD_FAILED: "Check connection and retry",
+    ErrorCodes.TRANSCRIPTION_FAILED: "Try recording again",
+    ErrorCodes.TRANSCRIPTION_EMPTY: "Record again, speak clearly",
+    ErrorCodes.AI_FEEDBACK_FAILED: "Wait and retry automatically",
+    ErrorCodes.SCENARIO_NOT_FOUND: "Choose another scenario",
+    ErrorCodes.PROCESSING_TIMEOUT: "Retry submission",
+    ErrorCodes.UNKNOWN_ERROR: "Contact support if issue persists",
+}
+
+
+def _get_error_code_from_exception(error: Exception) -> str:
+    """Determine the error code based on the exception type and message."""
+    error_str = str(error).lower()
+    
+    if "404" in error_str or "not found" in error_str:
+        return ErrorCodes.AUDIO_NOT_FOUND
+    elif "download" in error_str or "connection" in error_str or "timeout" in error_str:
+        return ErrorCodes.AUDIO_DOWNLOAD_FAILED
+    elif "transcri" in error_str or "whisper" in error_str or "speech" in error_str:
+        return ErrorCodes.TRANSCRIPTION_FAILED
+    elif "openai" in error_str or "gpt" in error_str or "feedback" in error_str:
+        return ErrorCodes.AI_FEEDBACK_FAILED
+    elif "scenario" in error_str:
+        return ErrorCodes.SCENARIO_NOT_FOUND
+    else:
+        return ErrorCodes.UNKNOWN_ERROR
+
+
+# =============================================================================
 # Helper Functions
 # =============================================================================
 
-def _mark_failed(db, submission, error_message: str):
-    """Mark submission as failed."""
+def _mark_failed(
+    db, 
+    submission, 
+    error_message: str,
+    error_code: str = None
+):
+    """
+    Mark submission as failed with user-friendly error info.
+    
+    Args:
+        db: Database session
+        submission: SpeakingSubmission instance
+        error_message: Technical error message (for logs)
+        error_code: Machine-readable error code
+    """
     from app.models.speaking import SubmissionStatus
     
+    # Determine error code if not provided
+    if error_code is None:
+        error_code = ErrorCodes.UNKNOWN_ERROR
+    
+    # Get user-friendly message
+    user_message = ERROR_MESSAGES.get(error_code, ERROR_MESSAGES[ErrorCodes.UNKNOWN_ERROR])
+    
+    # Check if retry is allowed
+    can_retry = error_code in RETRYABLE_ERRORS
+    max_retries = submission.max_retries if hasattr(submission, 'max_retries') else 3
+    
+    # Update submission
     submission.status = SubmissionStatus.FAILED
-    submission.error_message = error_message[:500]
+    submission.error_message = user_message
+    submission.error_code = error_code
     submission.processed_at = datetime.utcnow()
+    
+    # Increment retry count if applicable
+    if hasattr(submission, 'retry_count'):
+        submission.retry_count = (submission.retry_count or 0) + 1
+    
     db.commit()
     
-    logger.error(f"Submission {submission.id} marked as failed: {error_message}")
+    # Log technical details (not shown to user)
+    logger.error(
+        f"Submission {submission.id} failed. "
+        f"Code: {error_code}, "
+        f"Retry: {submission.retry_count}/{max_retries}, "
+        f"Technical: {error_message[:200]}"
+    )
 
 
 def _is_first_completed_submission(db, user_id: str, scenario_id: str) -> bool:

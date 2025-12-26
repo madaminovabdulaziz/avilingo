@@ -232,6 +232,22 @@ class SpeakingSubmissionStatus(BaseModel):
     progress_percent: int = Field(default=0, ge=0, le=100)
     estimated_seconds_remaining: Optional[int] = None
     error_message: Optional[str] = None
+    error_code: Optional[str] = Field(
+        default=None,
+        description="Machine-readable error code for frontend handling"
+    )
+    can_retry: bool = Field(
+        default=False,
+        description="Whether this submission can be retried"
+    )
+    retry_count: int = Field(
+        default=0,
+        description="Number of times this submission has been retried"
+    )
+    user_action: Optional[str] = Field(
+        default=None,
+        description="Suggested user action when failed"
+    )
 
 
 # =============================================================================

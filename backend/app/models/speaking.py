@@ -289,12 +289,22 @@ class SpeakingSubmission(Base):
     error_message: Mapped[Optional[str]] = mapped_column(
         Text, 
         nullable=True,
-        comment="Error message if processing failed"
+        comment="User-friendly error message if processing failed"
+    )
+    error_code: Mapped[Optional[str]] = mapped_column(
+        String(50),
+        nullable=True,
+        comment="Machine-readable error code: TRANSCRIPTION_FAILED, AI_FEEDBACK_FAILED, AUDIO_NOT_FOUND, etc."
     )
     retry_count: Mapped[int] = mapped_column(
         Integer,
         default=0,
         comment="Number of processing retries"
+    )
+    max_retries: Mapped[int] = mapped_column(
+        Integer,
+        default=3,
+        comment="Maximum allowed retries"
     )
     
     # ==========================================================================

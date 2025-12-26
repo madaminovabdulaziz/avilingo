@@ -422,12 +422,50 @@ class SpeakingService:
             progress_percent = 0
             estimated_seconds = None
         
+        # Determine retry eligibility
+        retry_count = submission.retry_count or 0
+        max_retries = getattr(submission, 'max_retries', 3) or 3
+        error_code = getattr(submission, 'error_code', None)
+        
+        # Define retryable error codes
+        RETRYABLE_ERRORS = {
+            "AUDIO_DOWNLOAD_FAILED",
+            "TRANSCRIPTION_FAILED", 
+            "AI_FEEDBACK_FAILED",
+            "PROCESSING_TIMEOUT",
+            "UNKNOWN_ERROR",
+        }
+        
+        # User action suggestions
+        USER_ACTIONS = {
+            "AUDIO_NOT_FOUND": "Record a new response",
+            "AUDIO_DOWNLOAD_FAILED": "Check connection and retry",
+            "TRANSCRIPTION_FAILED": "Try recording again",
+            "TRANSCRIPTION_EMPTY": "Record again, speak clearly",
+            "AI_FEEDBACK_FAILED": "Wait and retry automatically",
+            "SCENARIO_NOT_FOUND": "Choose another scenario",
+            "PROCESSING_TIMEOUT": "Retry submission",
+            "UNKNOWN_ERROR": "Contact support if issue persists",
+        }
+        
+        can_retry = (
+            submission.status == SubmissionStatus.FAILED
+            and error_code in RETRYABLE_ERRORS
+            and retry_count < max_retries
+        )
+        
+        user_action = USER_ACTIONS.get(error_code) if error_code else None
+        
         return SpeakingSubmissionStatus(
             id=submission.id,
             status=submission.status.value,
             progress_percent=progress_percent,
             estimated_seconds_remaining=estimated_seconds,
-            error_message=submission.error_message
+            error_message=submission.error_message,
+            error_code=error_code,
+            can_retry=can_retry,
+            retry_count=retry_count,
+            user_action=user_action
         )
     
     # =========================================================================
