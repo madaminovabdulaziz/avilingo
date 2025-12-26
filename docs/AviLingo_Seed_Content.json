@@ -1,0 +1,1853 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "created": "2025-01-15",
+    "description": "AviLingo Seed Content Database - Vocabulary, Listening, Speaking",
+    "icao_levels": {
+      "beginner": "Targeting Level 3→4 (Pre-operational to Operational)",
+      "intermediate": "Targeting Level 4→5 (Operational to Extended)", 
+      "advanced": "Targeting Level 5→6 (Extended to Expert)"
+    },
+    "categories": [
+      "standard_phraseology",
+      "weather",
+      "navigation",
+      "emergencies",
+      "aircraft_systems",
+      "airport_operations"
+    ]
+  },
+
+  "vocabulary": [
+    {
+      "id": "VOC-001",
+      "term": "affirm",
+      "phonetic": "/əˈfɜːm/",
+      "part_of_speech": "interjection",
+      "definition": "Yes, that is correct. Used instead of 'yes' in radiotelephony.",
+      "aviation_context": "Standard ICAO phraseology for confirming a statement or request.",
+      "example_atc": "Speedbird 123, confirm you are ready for departure?",
+      "example_response": "Affirm, Speedbird 123 ready for departure.",
+      "common_errors": [
+        "Using 'yes' or 'affirmative' instead of 'affirm'",
+        "Confusing with 'Roger' which only means 'received'"
+      ],
+      "cis_pronunciation_tips": "Stress on second syllable: af-FIRM, not AF-firm",
+      "category": "standard_phraseology",
+      "difficulty": 1,
+      "icao_level_target": 4,
+      "related_terms": ["negative", "roger", "wilco"]
+    },
+    {
+      "id": "VOC-002",
+      "term": "negative",
+      "phonetic": "/ˈneɡətɪv/",
+      "part_of_speech": "interjection",
+      "definition": "No, that is not correct. Permission not granted.",
+      "aviation_context": "Standard ICAO phraseology for denying or correcting.",
+      "example_atc": "Delta 456, are you able to accept runway 28L?",
+      "example_response": "Negative, Delta 456, we need runway 28R due to aircraft performance.",
+      "common_errors": [
+        "Using 'no' instead of 'negative'",
+        "Not providing reason when refusing"
+      ],
+      "cis_pronunciation_tips": "NEG-uh-tiv, three syllables. Don't drop the middle syllable.",
+      "category": "standard_phraseology",
+      "difficulty": 1,
+      "icao_level_target": 4,
+      "related_terms": ["affirm", "unable"]
+    },
+    {
+      "id": "VOC-003",
+      "term": "roger",
+      "phonetic": "/ˈrɒdʒər/",
+      "part_of_speech": "interjection",
+      "definition": "I have received all of your last transmission. Does NOT mean 'yes' or 'I will comply'.",
+      "aviation_context": "Acknowledgment of receipt only. Never use in response to a question requiring yes/no.",
+      "example_atc": "United 789, the weather at destination is deteriorating.",
+      "example_response": "Roger, United 789.",
+      "common_errors": [
+        "Using 'roger' to mean 'yes' or 'I will comply'",
+        "Using 'roger' in response to a clearance (should use readback)"
+      ],
+      "cis_pronunciation_tips": "ROJ-er, soft 'g' sound like 'j'. Not 'ROG-er' with hard 'g'.",
+      "category": "standard_phraseology",
+      "difficulty": 1,
+      "icao_level_target": 4,
+      "related_terms": ["affirm", "wilco", "copy"]
+    },
+    {
+      "id": "VOC-004",
+      "term": "wilco",
+      "phonetic": "/ˈwɪlkəʊ/",
+      "part_of_speech": "interjection",
+      "definition": "I understand your message and will comply with it. Short for 'will comply'.",
+      "aviation_context": "Use when acknowledging an instruction you will follow. Includes 'roger' so don't say both.",
+      "example_atc": "Lufthansa 450, after departure turn left heading 270.",
+      "example_response": "Wilco, Lufthansa 450.",
+      "common_errors": [
+        "Saying 'Roger, wilco' (redundant - wilco includes roger)",
+        "Using wilco without intending to comply"
+      ],
+      "cis_pronunciation_tips": "WIL-koh, stress on first syllable.",
+      "category": "standard_phraseology",
+      "difficulty": 1,
+      "icao_level_target": 4,
+      "related_terms": ["roger", "affirm"]
+    },
+    {
+      "id": "VOC-005",
+      "term": "say again",
+      "phonetic": "/seɪ əˈɡen/",
+      "part_of_speech": "phrase",
+      "definition": "Repeat all or the following part of your last transmission.",
+      "aviation_context": "Standard request for repetition. Never use 'repeat' which has a different military meaning.",
+      "example_atc": "Mumbai Control, Air India 505, say again the cleared level.",
+      "example_response": "Air India 505, climb and maintain flight level 350.",
+      "common_errors": [
+        "Using 'repeat' instead of 'say again'",
+        "Not specifying which part to repeat"
+      ],
+      "cis_pronunciation_tips": "Clear 'th' sound in 'the' if using 'say again the...'",
+      "category": "standard_phraseology",
+      "difficulty": 1,
+      "icao_level_target": 4,
+      "related_terms": ["readback", "confirm"]
+    },
+    {
+      "id": "VOC-006",
+      "term": "standby",
+      "phonetic": "/ˈstændbaɪ/",
+      "part_of_speech": "interjection",
+      "definition": "Wait and I will call you. No answer is expected.",
+      "aviation_context": "ATC uses when busy. Pilot should wait without further transmission.",
+      "example_atc": "Emirates 202, standby.",
+      "example_response": "[No response required - wait for callback]",
+      "common_errors": [
+        "Responding to 'standby' with acknowledgment",
+        "Repeating request immediately after 'standby'"
+      ],
+      "cis_pronunciation_tips": "STAND-by, not 'stand-BY'. Stress on first syllable.",
+      "category": "standard_phraseology",
+      "difficulty": 1,
+      "icao_level_target": 4,
+      "related_terms": ["wait", "hold"]
+    },
+    {
+      "id": "VOC-007",
+      "term": "unable",
+      "phonetic": "/ʌnˈeɪbl/",
+      "part_of_speech": "adjective",
+      "definition": "I cannot comply with your request or instruction.",
+      "aviation_context": "Pilot refusal of ATC instruction. Should always provide reason.",
+      "example_atc": "Aeroflot 215, descend to 3000 feet.",
+      "example_response": "Unable, Aeroflot 215, terrain.",
+      "common_errors": [
+        "Not providing reason for 'unable'",
+        "Using 'can't' instead of 'unable'"
+      ],
+      "cis_pronunciation_tips": "un-AY-bl, stress on second syllable. The 'a' is a long 'ay' sound.",
+      "category": "standard_phraseology",
+      "difficulty": 1,
+      "icao_level_target": 4,
+      "related_terms": ["negative", "request"]
+    },
+    {
+      "id": "VOC-008",
+      "term": "cleared",
+      "phonetic": "/klɪəd/",
+      "part_of_speech": "adjective",
+      "definition": "Authorized to proceed under the conditions specified.",
+      "aviation_context": "ATC authorization. Critical word - must be in every clearance.",
+      "example_atc": "Turkish 301, cleared for takeoff runway 05.",
+      "example_response": "Cleared for takeoff runway 05, Turkish 301.",
+      "common_errors": [
+        "Confusing 'cleared for takeoff' with 'cleared to land'",
+        "Omitting 'cleared' in readback"
+      ],
+      "cis_pronunciation_tips": "KLEERD, one syllable. Not 'klee-uh-red'.",
+      "category": "standard_phraseology",
+      "difficulty": 1,
+      "icao_level_target": 4,
+      "related_terms": ["takeoff", "landing", "approach"]
+    },
+    {
+      "id": "VOC-009",
+      "term": "go-around",
+      "phonetic": "/ˈɡoʊ.əˌraʊnd/",
+      "part_of_speech": "noun/verb",
+      "definition": "A maneuver where the pilot aborts landing and climbs away from the runway.",
+      "aviation_context": "Commanded by ATC or initiated by pilot when landing is unsafe.",
+      "example_atc": "United 472, go around, traffic on runway.",
+      "example_response": "Going around, United 472.",
+      "common_errors": [
+        "Confusing with 'missed approach' (different procedure)",
+        "Hesitating during go-around announcement"
+      ],
+      "cis_pronunciation_tips": "GO-uh-round. The 'ow' in 'around' is a diphthong, not flat 'o'.",
+      "category": "standard_phraseology",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "related_terms": ["missed approach", "overshoot"]
+    },
+    {
+      "id": "VOC-010",
+      "term": "hold short",
+      "phonetic": "/hoʊld ʃɔːrt/",
+      "part_of_speech": "phrase",
+      "definition": "Stop before reaching a specified point (usually runway).",
+      "aviation_context": "Critical ground movement instruction. Requires readback.",
+      "example_atc": "Cathay 880, hold short of runway 25L.",
+      "example_response": "Hold short of runway 25L, Cathay 880.",
+      "common_errors": [
+        "Not reading back hold short instructions",
+        "Crossing runway after incomplete instruction"
+      ],
+      "cis_pronunciation_tips": "HOHLD SHORT. The 'o' in 'hold' is long 'oh'. Clear 'sh' sound.",
+      "category": "standard_phraseology",
+      "difficulty": 1,
+      "icao_level_target": 4,
+      "related_terms": ["taxi", "cross", "line up"]
+    },
+    {
+      "id": "VOC-011",
+      "term": "line up and wait",
+      "phonetic": "/laɪn ʌp ænd weɪt/",
+      "part_of_speech": "phrase",
+      "definition": "Enter the runway and wait for takeoff clearance.",
+      "aviation_context": "Formerly 'position and hold' in US. Does NOT authorize takeoff.",
+      "example_atc": "Air France 692, runway 27, line up and wait.",
+      "example_response": "Runway 27, line up and wait, Air France 692.",
+      "common_errors": [
+        "Interpreting as takeoff clearance",
+        "Using old phraseology 'position and hold'"
+      ],
+      "cis_pronunciation_tips": "LINE up, not 'LIN up'. Long 'i' sound.",
+      "category": "standard_phraseology",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "related_terms": ["cleared for takeoff", "hold short"]
+    },
+    {
+      "id": "VOC-012",
+      "term": "squawk",
+      "phonetic": "/skwɔːk/",
+      "part_of_speech": "verb",
+      "definition": "Select the specified transponder code.",
+      "aviation_context": "ATC assigns 4-digit code for identification on radar.",
+      "example_atc": "KLM 605, squawk 4521.",
+      "example_response": "Squawk 4521, KLM 605.",
+      "common_errors": [
+        "Incorrect code readback",
+        "Not setting transponder to correct mode"
+      ],
+      "cis_pronunciation_tips": "SKWAWK. The 'qu' makes a 'kw' sound, not 'sk'.",
+      "category": "standard_phraseology",
+      "difficulty": 1,
+      "icao_level_target": 4,
+      "related_terms": ["transponder", "ident", "7500", "7600", "7700"]
+    },
+    {
+      "id": "VOC-013",
+      "term": "mayday",
+      "phonetic": "/ˈmeɪdeɪ/",
+      "part_of_speech": "noun",
+      "definition": "International distress signal indicating grave and imminent danger requiring immediate assistance.",
+      "aviation_context": "Highest priority emergency. Said three times: 'Mayday, Mayday, Mayday.'",
+      "example_atc": "Mayday, Mayday, Mayday. Speedbird 38 heavy, engine fire, returning to London.",
+      "example_response": "[ATC acknowledges and provides priority handling]",
+      "common_errors": [
+        "Not saying three times",
+        "Using for non-life-threatening situations (should use Pan-Pan)"
+      ],
+      "cis_pronunciation_tips": "MAY-day, stress on first syllable. Clear 'ay' diphthong.",
+      "category": "emergencies",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "related_terms": ["pan-pan", "7700", "emergency"]
+    },
+    {
+      "id": "VOC-014",
+      "term": "pan-pan",
+      "phonetic": "/pæn pæn/",
+      "part_of_speech": "noun",
+      "definition": "International urgency signal indicating a condition concerning safety but not immediate danger.",
+      "aviation_context": "Second priority after Mayday. Said three times for urgency.",
+      "example_atc": "Pan-Pan, Pan-Pan, Pan-Pan. ABC123, medical emergency, passenger unconscious.",
+      "example_response": "[ATC acknowledges and expedites assistance]",
+      "common_errors": [
+        "Using Mayday when Pan-Pan is appropriate",
+        "Pronouncing as 'pan-pan' like cooking pan (should be 'pahn-pahn')"
+      ],
+      "cis_pronunciation_tips": "PAHN-PAHN, with 'ah' sound like 'father', not like 'pan'.",
+      "category": "emergencies",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "related_terms": ["mayday", "urgency", "medical"]
+    },
+    {
+      "id": "VOC-015",
+      "term": "souls on board",
+      "phonetic": "/soʊlz ɒn bɔːd/",
+      "part_of_speech": "phrase",
+      "definition": "Total number of persons on the aircraft (passengers plus crew).",
+      "aviation_context": "Required information during emergency declaration for rescue planning.",
+      "example_atc": "ABC123, say souls on board and fuel remaining.",
+      "example_response": "ABC123, 180 souls on board, 4 hours fuel remaining.",
+      "common_errors": [
+        "Giving only passenger count (must include crew)",
+        "Confusing 'souls' with 'passengers'"
+      ],
+      "cis_pronunciation_tips": "SOHLZ, long 'o' sound. Not 'sulz'.",
+      "category": "emergencies",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "related_terms": ["fuel remaining", "emergency", "mayday"]
+    },
+    {
+      "id": "VOC-016",
+      "term": "flight level",
+      "phonetic": "/flaɪt ˈlevl/",
+      "part_of_speech": "noun",
+      "definition": "Altitude expressed in hundreds of feet when set to standard pressure (1013.25 hPa / 29.92 inHg).",
+      "aviation_context": "Used above transition altitude. FL350 = 35,000 feet.",
+      "example_atc": "Emirates 502, climb and maintain flight level 350.",
+      "example_response": "Climb and maintain flight level 350, Emirates 502.",
+      "common_errors": [
+        "Saying 'flight level 35000' instead of 'flight level 350'",
+        "Confusing altitude (feet) with flight level"
+      ],
+      "cis_pronunciation_tips": "Say 'flight level three five zero', not 'three hundred fifty'.",
+      "category": "navigation",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "related_terms": ["altitude", "transition level", "climb", "descend"]
+    },
+    {
+      "id": "VOC-017",
+      "term": "heading",
+      "phonetic": "/ˈhedɪŋ/",
+      "part_of_speech": "noun",
+      "definition": "The direction in which the longitudinal axis of the aircraft is pointed, measured clockwise from north.",
+      "aviation_context": "Given in three digits. 'Fly heading 270' means point the nose west.",
+      "example_atc": "United 888, turn left heading 270.",
+      "example_response": "Turn left heading 270, United 888.",
+      "common_errors": [
+        "Saying 'heading 27' instead of 'heading 270'",
+        "Confusing heading with track"
+      ],
+      "cis_pronunciation_tips": "HED-ing. Short 'e' sound, not 'HEED-ing'.",
+      "category": "navigation",
+      "difficulty": 1,
+      "icao_level_target": 4,
+      "related_terms": ["track", "bearing", "course"]
+    },
+    {
+      "id": "VOC-018",
+      "term": "transition level",
+      "phonetic": "/trænˈzɪʃn ˈlevl/",
+      "part_of_speech": "noun",
+      "definition": "The lowest flight level available for use above the transition altitude.",
+      "aviation_context": "Climbing through transition level, change altimeter to standard pressure.",
+      "example_atc": "Swiss 456, passing transition level, set standard.",
+      "example_response": "Set standard, Swiss 456.",
+      "common_errors": [
+        "Confusing transition level with transition altitude",
+        "Not changing altimeter setting"
+      ],
+      "cis_pronunciation_tips": "tran-ZI-shun, stress on second syllable. The 's' sounds like 'zh'.",
+      "category": "navigation",
+      "difficulty": 3,
+      "icao_level_target": 5,
+      "related_terms": ["transition altitude", "QNH", "QNE", "flight level"]
+    },
+    {
+      "id": "VOC-019",
+      "term": "turbulence",
+      "phonetic": "/ˈtɜːbjələns/",
+      "part_of_speech": "noun",
+      "definition": "Irregular motion of the atmosphere causing bumpy flight conditions.",
+      "aviation_context": "Reported as light, moderate, severe, or extreme.",
+      "example_atc": "All stations, pilot reports moderate turbulence at FL350 over ROMEO.",
+      "example_response": "Copied, moderate turbulence FL350 over ROMEO, requesting FL370.",
+      "common_errors": [
+        "Not specifying intensity (light/moderate/severe)",
+        "Pronouncing 'tur-BU-lence' instead of 'TUR-bu-lence'"
+      ],
+      "cis_pronunciation_tips": "TUR-byuh-luhns. Stress on first syllable. 'u' like 'bird'.",
+      "category": "weather",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "related_terms": ["chop", "windshear", "CAT"]
+    },
+    {
+      "id": "VOC-020",
+      "term": "ceiling",
+      "phonetic": "/ˈsiːlɪŋ/",
+      "part_of_speech": "noun",
+      "definition": "The height above ground of the lowest layer of cloud covering more than half the sky.",
+      "aviation_context": "Critical for approach minimums. 'Ceiling 500 broken' means clouds at 500 feet.",
+      "example_atc": "Current weather: ceiling 800 overcast, visibility 2 miles in rain.",
+      "example_response": "Roger, ceiling 800 overcast, visibility 2 miles.",
+      "common_errors": [
+        "Confusing with 'cloud base' (ceiling requires >50% coverage)",
+        "Using wrong unit (should be feet AGL)"
+      ],
+      "cis_pronunciation_tips": "SEE-ling. Long 'ee' sound. Not 'sil-ing'.",
+      "category": "weather",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "related_terms": ["visibility", "overcast", "broken", "METAR"]
+    },
+    {
+      "id": "VOC-021",
+      "term": "visibility",
+      "phonetic": "/ˌvɪzəˈbɪləti/",
+      "part_of_speech": "noun",
+      "definition": "The greatest distance at which prominent objects can be seen and identified.",
+      "aviation_context": "Reported in meters (ICAO) or statute miles (US). Critical for approach minimums.",
+      "example_atc": "Visibility 3000 meters in fog.",
+      "example_response": "Copied, visibility 3000 meters.",
+      "common_errors": [
+        "Confusing meters with kilometers",
+        "Not converting between miles and meters"
+      ],
+      "cis_pronunciation_tips": "viz-uh-BIL-uh-tee. Stress on third syllable. Don't drop syllables.",
+      "category": "weather",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "related_terms": ["RVR", "ceiling", "IMC", "VMC"]
+    },
+    {
+      "id": "VOC-022",
+      "term": "wind shear",
+      "phonetic": "/wɪnd ʃɪər/",
+      "part_of_speech": "noun",
+      "definition": "A sudden change in wind speed and/or direction over a short distance.",
+      "aviation_context": "Dangerous during takeoff and landing. Requires immediate pilot action.",
+      "example_atc": "Caution wind shear reported on final runway 27, plus 15 knots at 500 feet.",
+      "example_response": "Copied wind shear, plus 15 knots at 500 feet, runway 27.",
+      "common_errors": [
+        "Not specifying gain or loss (+/- knots)",
+        "Confusing with regular gusty wind"
+      ],
+      "cis_pronunciation_tips": "WIND SHEER. The 'sh' is clear, the 'ear' rhymes with 'beer'.",
+      "category": "weather",
+      "difficulty": 3,
+      "icao_level_target": 4,
+      "related_terms": ["microburst", "go-around", "gusty"]
+    },
+    {
+      "id": "VOC-023",
+      "term": "icing",
+      "phonetic": "/ˈaɪsɪŋ/",
+      "part_of_speech": "noun",
+      "definition": "The accumulation of ice on the external surfaces of an aircraft.",
+      "aviation_context": "Reported as light, moderate, or severe. Affects aircraft performance.",
+      "example_atc": "Moderate icing reported in clouds between FL100 and FL150.",
+      "example_response": "Copied moderate icing FL100 to FL150, requesting FL160.",
+      "common_errors": [
+        "Not specifying type (rime, clear, mixed)",
+        "Underestimating severity"
+      ],
+      "cis_pronunciation_tips": "ICE-ing. Long 'i' sound like 'ice'.",
+      "category": "weather",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "related_terms": ["de-icing", "anti-icing", "freezing level"]
+    },
+    {
+      "id": "VOC-024",
+      "term": "METAR",
+      "phonetic": "/ˈmetɑːr/",
+      "part_of_speech": "noun",
+      "definition": "Meteorological Aerodrome Report - a standardized weather observation format.",
+      "aviation_context": "Issued hourly, provides current conditions at an airport.",
+      "example_atc": "METAR KJFK 251856Z 31008KT 10SM FEW040 BKN250 M02/M15 A3032",
+      "example_response": "Understanding the METAR is essential for flight planning.",
+      "common_errors": [
+        "Misreading wind direction as speed",
+        "Confusing visibility units"
+      ],
+      "cis_pronunciation_tips": "MEE-tar or MET-ar. Either pronunciation acceptable.",
+      "category": "weather",
+      "difficulty": 3,
+      "icao_level_target": 4,
+      "related_terms": ["TAF", "ATIS", "SPECI", "SIGMET"]
+    },
+    {
+      "id": "VOC-025",
+      "term": "cumulonimbus",
+      "phonetic": "/ˌkjuːmjələˈnɪmbəs/",
+      "part_of_speech": "noun",
+      "definition": "Large, towering clouds associated with thunderstorms, heavy rain, lightning, and severe turbulence.",
+      "aviation_context": "Abbreviated CB. Must be avoided. Reported in METAR/TAF.",
+      "example_atc": "CB reported along the route, deviation approved.",
+      "example_response": "Requesting deviation right of track due CB.",
+      "common_errors": [
+        "Pronouncing each syllable separately",
+        "Underestimating danger of embedded CB"
+      ],
+      "cis_pronunciation_tips": "kyoo-myuh-loh-NIM-bus. Five syllables, stress on fourth.",
+      "category": "weather",
+      "difficulty": 3,
+      "icao_level_target": 5,
+      "related_terms": ["thunderstorm", "TCU", "convective activity"]
+    },
+    {
+      "id": "VOC-026",
+      "term": "aileron",
+      "phonetic": "/ˈeɪlərɒn/",
+      "part_of_speech": "noun",
+      "definition": "Hinged control surface on the trailing edge of each wing that controls roll.",
+      "aviation_context": "Deflect oppositely: left aileron up, right aileron down = roll right.",
+      "example_atc": "Pilot: We have a jammed left aileron, difficulty controlling bank.",
+      "example_response": "Understand jammed aileron, emergency services standing by.",
+      "common_errors": [
+        "Confusing with elevator (pitch control)",
+        "Mispronouncing as 'ay-le-RON'"
+      ],
+      "cis_pronunciation_tips": "AY-luh-ron. Stress on first syllable.",
+      "category": "aircraft_systems",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "related_terms": ["elevator", "rudder", "control surface", "roll"]
+    },
+    {
+      "id": "VOC-027",
+      "term": "elevator",
+      "phonetic": "/ˈelɪveɪtər/",
+      "part_of_speech": "noun",
+      "definition": "Hinged control surface on the horizontal stabilizer that controls pitch.",
+      "aviation_context": "Deflecting up causes nose up pitch, down causes nose down.",
+      "example_atc": "Pilot: Experiencing elevator flutter at high speed.",
+      "example_response": "Reduce speed immediately, say intentions.",
+      "common_errors": [
+        "Confusing with elevon (combination control)",
+        "Incorrect description of movement/effect"
+      ],
+      "cis_pronunciation_tips": "EL-uh-vay-ter. Not 'ee-lev-ator'.",
+      "category": "aircraft_systems",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "related_terms": ["aileron", "rudder", "pitch", "trim"]
+    },
+    {
+      "id": "VOC-028",
+      "term": "rudder",
+      "phonetic": "/ˈrʌdər/",
+      "part_of_speech": "noun",
+      "definition": "Hinged control surface on the vertical stabilizer that controls yaw.",
+      "aviation_context": "Controls left/right movement of the nose around the vertical axis.",
+      "example_atc": "Pilot: Rudder is stuck in neutral position.",
+      "example_response": "Copied stuck rudder, what are your intentions?",
+      "common_errors": [
+        "Confusing yaw with roll",
+        "Not understanding rudder trim"
+      ],
+      "cis_pronunciation_tips": "RUD-er. Short 'u' sound like 'but'.",
+      "category": "aircraft_systems",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "related_terms": ["yaw", "aileron", "elevator", "vertical stabilizer"]
+    },
+    {
+      "id": "VOC-029",
+      "term": "thrust",
+      "phonetic": "/θrʌst/",
+      "part_of_speech": "noun",
+      "definition": "The forward force produced by an aircraft's engines.",
+      "aviation_context": "Overcomes drag. Measured in pounds or newtons.",
+      "example_atc": "Pilot: Reducing thrust due to engine vibration.",
+      "example_response": "Copied reducing thrust, nearest suitable airport is 50 miles ahead.",
+      "common_errors": [
+        "Confusing thrust with power",
+        "Pronouncing 'th' as 't' or 's'"
+      ],
+      "cis_pronunciation_tips": "THRUST. Practice the 'th' sound - tongue between teeth.",
+      "category": "aircraft_systems",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "related_terms": ["power", "throttle", "N1", "EPR"]
+    },
+    {
+      "id": "VOC-030",
+      "term": "hydraulic",
+      "phonetic": "/haɪˈdrɔːlɪk/",
+      "part_of_speech": "adjective",
+      "definition": "Relating to the system that uses fluid pressure to operate aircraft components.",
+      "aviation_context": "Powers flight controls, landing gear, brakes in most jet aircraft.",
+      "example_atc": "Pilot: We have lost hydraulic system A, flight controls operating normally on system B.",
+      "example_response": "Copied loss of hydraulic system A, advise if assistance required.",
+      "common_errors": [
+        "Saying 'high-DRAW-lic' instead of 'hy-DROL-ic'",
+        "Confusing with pneumatic system"
+      ],
+      "cis_pronunciation_tips": "hy-DROH-lik. Stress on second syllable. 'H' is soft.",
+      "category": "aircraft_systems",
+      "difficulty": 3,
+      "icao_level_target": 4,
+      "related_terms": ["pneumatic", "electrical", "system failure"]
+    },
+    {
+      "id": "VOC-031",
+      "term": "flaps",
+      "phonetic": "/flæps/",
+      "part_of_speech": "noun",
+      "definition": "Hinged surfaces on the trailing edge of the wings that increase lift and drag.",
+      "aviation_context": "Extended for takeoff and landing to allow slower speeds.",
+      "example_atc": "Pilot: Flaps stuck at 15 degrees, unable to extend further.",
+      "example_response": "Copied flaps stuck at 15, expect longer landing distance.",
+      "common_errors": [
+        "Confusing flap positions/settings",
+        "Not reading back flap setting changes"
+      ],
+      "cis_pronunciation_tips": "FLAPS. Short 'a' like 'cat'. Clear 'ps' ending.",
+      "category": "aircraft_systems",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "related_terms": ["slats", "spoilers", "lift", "configuration"]
+    },
+    {
+      "id": "VOC-032",
+      "term": "gear",
+      "phonetic": "/ɡɪər/",
+      "part_of_speech": "noun",
+      "definition": "The landing gear; the wheels and supporting structure.",
+      "aviation_context": "Extended for landing, retracted after takeoff.",
+      "example_atc": "Singapore 21, confirm gear down.",
+      "example_response": "Gear down and locked, Singapore 21.",
+      "common_errors": [
+        "Not confirming 'locked' with 'down'",
+        "Confusing 'gear up' command timing"
+      ],
+      "cis_pronunciation_tips": "GEER. Long 'ee' sound. Not 'gay-er'.",
+      "category": "aircraft_systems",
+      "difficulty": 1,
+      "icao_level_target": 4,
+      "related_terms": ["gear down", "gear up", "locked", "unsafe gear"]
+    },
+    {
+      "id": "VOC-033",
+      "term": "APU",
+      "phonetic": "/ˌeɪ piː ˈjuː/",
+      "part_of_speech": "noun",
+      "definition": "Auxiliary Power Unit - a small engine that provides electrical power and pneumatic pressure on the ground.",
+      "aviation_context": "Used before main engine start and for ground operations.",
+      "example_atc": "Pilot: APU unserviceable, request external power for engine start.",
+      "example_response": "Ground power available at gate 15.",
+      "common_errors": [
+        "Not knowing what APU stands for",
+        "Confusing APU with GPU (ground power unit)"
+      ],
+      "cis_pronunciation_tips": "Spell out: A-P-U. Not 'ay-poo'.",
+      "category": "aircraft_systems",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "related_terms": ["GPU", "bleed air", "electrical", "engine start"]
+    },
+    {
+      "id": "VOC-034",
+      "term": "VOR",
+      "phonetic": "/viː oʊ ɑːr/",
+      "part_of_speech": "noun",
+      "definition": "VHF Omnidirectional Range - a ground-based navigation aid.",
+      "aviation_context": "Provides bearing information to/from the station.",
+      "example_atc": "Proceed direct to ROMEO VOR.",
+      "example_response": "Direct ROMEO VOR, KLM 442.",
+      "common_errors": [
+        "Pronouncing as 'vor' instead of spelling out",
+        "Confusing radial TO with FROM"
+      ],
+      "cis_pronunciation_tips": "Spell out: V-O-R. Three separate letters.",
+      "category": "navigation",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "related_terms": ["NDB", "ILS", "DME", "radial"]
+    },
+    {
+      "id": "VOC-035",
+      "term": "ILS",
+      "phonetic": "/ˌaɪ el ˈes/",
+      "part_of_speech": "noun",
+      "definition": "Instrument Landing System - precision approach aid providing lateral and vertical guidance.",
+      "aviation_context": "Most accurate approach system. Consists of localizer and glideslope.",
+      "example_atc": "Qatar 75, cleared ILS runway 27L approach.",
+      "example_response": "Cleared ILS runway 27L, Qatar 75.",
+      "common_errors": [
+        "Pronouncing as 'ils' instead of spelling out",
+        "Confusing with LOC-only approach"
+      ],
+      "cis_pronunciation_tips": "Spell out: I-L-S. Three separate letters.",
+      "category": "navigation",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "related_terms": ["localizer", "glideslope", "approach", "minimums"]
+    },
+    {
+      "id": "VOC-036",
+      "term": "waypoint",
+      "phonetic": "/ˈweɪpɔɪnt/",
+      "part_of_speech": "noun",
+      "definition": "A predetermined geographical position used for route navigation.",
+      "aviation_context": "Named with 5-letter pronounceable codes (e.g., ROMEO, BRAVO).",
+      "example_atc": "Proceed direct waypoint MERIT.",
+      "example_response": "Direct MERIT, United 505.",
+      "common_errors": [
+        "Mispronouncing waypoint names",
+        "Confusing with intersection"
+      ],
+      "cis_pronunciation_tips": "WAY-point. Clear 'w' sound, not 'v'.",
+      "category": "navigation",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "related_terms": ["intersection", "fix", "RNAV", "direct"]
+    },
+    {
+      "id": "VOC-037",
+      "term": "taxiway",
+      "phonetic": "/ˈtæksiweɪ/",
+      "part_of_speech": "noun",
+      "definition": "A defined path for aircraft ground movement connecting runways, ramps, and hangars.",
+      "aviation_context": "Designated by letters (e.g., taxiway Alpha, Bravo).",
+      "example_atc": "Qatar 101, taxi via Alpha, Bravo to runway 05.",
+      "example_response": "Taxi via Alpha, Bravo to runway 05, Qatar 101.",
+      "common_errors": [
+        "Not reading back the full taxi route",
+        "Confusing taxiway letters"
+      ],
+      "cis_pronunciation_tips": "TAK-see-way. Not 'taxi-VAY'.",
+      "category": "airport_operations",
+      "difficulty": 1,
+      "icao_level_target": 4,
+      "related_terms": ["apron", "ramp", "runway", "taxi"]
+    },
+    {
+      "id": "VOC-038",
+      "term": "apron",
+      "phonetic": "/ˈeɪprən/",
+      "part_of_speech": "noun",
+      "definition": "A defined area intended for aircraft parking, loading, and unloading passengers and cargo.",
+      "aviation_context": "Also called 'ramp' in the US. Where aircraft are serviced at gates.",
+      "example_atc": "Emirates 507, taxi to apron stand 42.",
+      "example_response": "Taxi to apron stand 42, Emirates 507.",
+      "common_errors": [
+        "Confusing apron with taxiway",
+        "Pronouncing as 'ay-PRAWN'"
+      ],
+      "cis_pronunciation_tips": "AY-prun. Stress on first syllable.",
+      "category": "airport_operations",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "related_terms": ["ramp", "gate", "stand", "parking"]
+    },
+    {
+      "id": "VOC-039",
+      "term": "pushback",
+      "phonetic": "/ˈpʊʃbæk/",
+      "part_of_speech": "noun/verb",
+      "definition": "The procedure of pushing an aircraft backwards from the gate using a tug.",
+      "aviation_context": "Requires ATC approval. First step in departure.",
+      "example_atc": "Aeroflot 215, pushback approved, facing east.",
+      "example_response": "Pushback approved facing east, Aeroflot 215.",
+      "common_errors": [
+        "Starting pushback without clearance",
+        "Not specifying facing direction"
+      ],
+      "cis_pronunciation_tips": "PUSH-bak. Clear 'sh' sound.",
+      "category": "airport_operations",
+      "difficulty": 1,
+      "icao_level_target": 4,
+      "related_terms": ["startup", "taxi", "gate", "tug"]
+    },
+    {
+      "id": "VOC-040",
+      "term": "de-icing",
+      "phonetic": "/diːˈaɪsɪŋ/",
+      "part_of_speech": "noun",
+      "definition": "The removal of ice, frost, or snow from aircraft surfaces before flight.",
+      "aviation_context": "Uses heated fluid. Different from anti-icing which prevents ice formation.",
+      "example_atc": "Air Canada 881, proceed to de-icing pad.",
+      "example_response": "Proceeding to de-icing pad, Air Canada 881.",
+      "common_errors": [
+        "Confusing de-icing with anti-icing",
+        "Not specifying holdover time"
+      ],
+      "cis_pronunciation_tips": "dee-EYE-sing. Stress on 'ice'.",
+      "category": "airport_operations",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "related_terms": ["anti-icing", "holdover time", "frost", "contamination"]
+    },
+    {
+      "id": "VOC-041",
+      "term": "clearance delivery",
+      "phonetic": "/ˈklɪərəns dɪˈlɪvəri/",
+      "part_of_speech": "noun",
+      "definition": "ATC position responsible for issuing departure clearances to pilots.",
+      "aviation_context": "First ATC contact before flight. Provides route, altitude, squawk code.",
+      "example_atc": "Uzbekistan Airways 653, contact clearance delivery on 121.9.",
+      "example_response": "Clearance delivery 121.9, Uzbekistan Airways 653.",
+      "common_errors": [
+        "Confusing with ground control",
+        "Not reading back full clearance"
+      ],
+      "cis_pronunciation_tips": "KLEER-uhns de-LIV-uh-ree.",
+      "category": "standard_phraseology",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "related_terms": ["ground control", "tower", "departure", "clearance"]
+    },
+    {
+      "id": "VOC-042",
+      "term": "expedite",
+      "phonetic": "/ˈekspɪdaɪt/",
+      "part_of_speech": "verb",
+      "definition": "To execute quickly; to climb or descend at a higher than normal rate.",
+      "aviation_context": "ATC instruction when urgency or traffic separation requires faster action.",
+      "example_atc": "Delta 234, expedite climb through FL200, traffic.",
+      "example_response": "Expediting through FL200, Delta 234.",
+      "common_errors": [
+        "Not increasing rate sufficiently",
+        "Confusing with 'immediately'"
+      ],
+      "cis_pronunciation_tips": "EK-spuh-dite. Stress on first syllable.",
+      "category": "standard_phraseology",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "related_terms": ["immediately", "traffic", "climb", "descend"]
+    },
+    {
+      "id": "VOC-043",
+      "term": "maintain",
+      "phonetic": "/meɪnˈteɪn/",
+      "part_of_speech": "verb",
+      "definition": "To continue at the specified altitude, heading, or speed.",
+      "aviation_context": "Used with altitude, heading, or speed assignments.",
+      "example_atc": "British Airways 178, maintain FL350.",
+      "example_response": "Maintain FL350, British Airways 178.",
+      "common_errors": [
+        "Confusing 'maintain' with 'climb to and maintain'",
+        "Not holding assigned level"
+      ],
+      "cis_pronunciation_tips": "main-TAYN. Stress on second syllable.",
+      "category": "standard_phraseology",
+      "difficulty": 1,
+      "icao_level_target": 4,
+      "related_terms": ["climb", "descend", "altitude", "heading"]
+    },
+    {
+      "id": "VOC-044",
+      "term": "radar contact",
+      "phonetic": "/ˈreɪdɑːr ˈkɒntækt/",
+      "part_of_speech": "phrase",
+      "definition": "ATC confirmation that the aircraft is identified on radar.",
+      "aviation_context": "Pilot no longer needs to report position until radar contact lost.",
+      "example_atc": "Thai 622, radar contact, 15 miles southwest of PAPA.",
+      "example_response": "Radar contact, Thai 622.",
+      "common_errors": [
+        "Not acknowledging radar contact",
+        "Continuing position reports after radar contact"
+      ],
+      "cis_pronunciation_tips": "RAY-dar KON-takt.",
+      "category": "standard_phraseology",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "related_terms": ["radar vectors", "identified", "squawk ident"]
+    },
+    {
+      "id": "VOC-045",
+      "term": "expect",
+      "phonetic": "/ɪkˈspekt/",
+      "part_of_speech": "verb",
+      "definition": "Used to inform about anticipated clearances or conditions; not an actual clearance.",
+      "aviation_context": "For planning only. Actual clearance will follow separately.",
+      "example_atc": "JAL 006, expect FL380 in 10 minutes.",
+      "example_response": "Expect FL380 in 10 minutes, JAL 006.",
+      "common_errors": [
+        "Treating 'expect' as actual clearance",
+        "Climbing/descending based on 'expect' only"
+      ],
+      "cis_pronunciation_tips": "ik-SPEKT. Stress on second syllable.",
+      "category": "standard_phraseology",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "related_terms": ["cleared", "advise", "planning"]
+    },
+    {
+      "id": "VOC-046",
+      "term": "report",
+      "phonetic": "/rɪˈpɔːt/",
+      "part_of_speech": "verb",
+      "definition": "To pass information to ATC at a specified point or condition.",
+      "aviation_context": "ATC instruction to provide information at a specific time/place.",
+      "example_atc": "SAS 937, report field in sight.",
+      "example_response": "Wilco, SAS 937... SAS 937, field in sight.",
+      "common_errors": [
+        "Forgetting to make required report",
+        "Making report at wrong time/place"
+      ],
+      "cis_pronunciation_tips": "ri-PORT. Stress on second syllable.",
+      "category": "standard_phraseology",
+      "difficulty": 1,
+      "icao_level_target": 4,
+      "related_terms": ["advise", "confirm", "inform"]
+    },
+    {
+      "id": "VOC-047",
+      "term": "traffic",
+      "phonetic": "/ˈtræfɪk/",
+      "part_of_speech": "noun",
+      "definition": "Other aircraft in the vicinity that may affect your flight.",
+      "aviation_context": "ATC provides traffic information for awareness or separation.",
+      "example_atc": "Qantas 94, traffic 12 o'clock, 5 miles, opposite direction, FL360, Boeing 777.",
+      "example_response": "Looking for traffic, Qantas 94... Traffic in sight.",
+      "common_errors": [
+        "Not acknowledging traffic calls",
+        "Confusing clock position"
+      ],
+      "cis_pronunciation_tips": "TRAF-ik. Stress on first syllable.",
+      "category": "standard_phraseology",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "related_terms": ["in sight", "negative contact", "TCAS"]
+    },
+    {
+      "id": "VOC-048",
+      "term": "request",
+      "phonetic": "/rɪˈkwest/",
+      "part_of_speech": "verb/noun",
+      "definition": "To ask for something from ATC.",
+      "aviation_context": "Proper way to ask for clearance changes, information, or assistance.",
+      "example_atc": "Control, Iberia 341, request higher.",
+      "example_response": "Iberia 341, climb and maintain FL390.",
+      "common_errors": [
+        "Demanding instead of requesting",
+        "Not specifying what is being requested"
+      ],
+      "cis_pronunciation_tips": "ri-KWEST. Stress on second syllable.",
+      "category": "standard_phraseology",
+      "difficulty": 1,
+      "icao_level_target": 4,
+      "related_terms": ["approve", "unable", "advise"]
+    },
+    {
+      "id": "VOC-049",
+      "term": "seven five hundred",
+      "phonetic": "/ˈsevn faɪv ˈhʌndrəd/",
+      "part_of_speech": "phrase",
+      "definition": "Transponder code 7500 indicating aircraft hijacking.",
+      "aviation_context": "Emergency code. Never squawk unless actual hijack situation.",
+      "example_atc": "[Silent - aircraft squawks 7500]",
+      "example_response": "[ATC initiates hijack procedures quietly]",
+      "common_errors": [
+        "Accidentally selecting 7500",
+        "Announcing hijack code on radio"
+      ],
+      "cis_pronunciation_tips": "Pronounced clearly: SEVEN FIVE HUNDRED.",
+      "category": "emergencies",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "related_terms": ["7600", "7700", "squawk", "hijack"]
+    },
+    {
+      "id": "VOC-050",
+      "term": "seven six hundred",
+      "phonetic": "/ˈsevn sɪks ˈhʌndrəd/",
+      "part_of_speech": "phrase",
+      "definition": "Transponder code 7600 indicating radio communication failure.",
+      "aviation_context": "Used when unable to communicate by radio. Follow lost comm procedures.",
+      "example_atc": "[Aircraft squawks 7600 - ATC provides light signals]",
+      "example_response": "[Pilot follows published lost comm procedures]",
+      "common_errors": [
+        "Not squawking 7600 during comm failure",
+        "Not following lost comm procedures"
+      ],
+      "cis_pronunciation_tips": "SEVEN SIX HUNDRED. Clear pronunciation essential.",
+      "category": "emergencies",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "related_terms": ["7500", "7700", "radio failure", "NORDO"]
+    }
+  ],
+
+  "listening_exercises": [
+    {
+      "id": "LSN-001",
+      "title": "Standard IFR Departure Clearance",
+      "difficulty": 1,
+      "icao_level_target": 4,
+      "category": "clearance_delivery",
+      "accent": "American - Standard",
+      "speed": "slow",
+      "duration_seconds": 28,
+      "scenario_type": "routine",
+      "transcript": "Uzbekistan Airways 653, cleared to Tashkent via the Kennedy One departure, radar vectors to MERIT, then as filed. Climb and maintain 5,000, expect flight level 350 ten minutes after departure. Departure frequency 125.9. Squawk 4521.",
+      "audio_generation_notes": "Clear, slow pace. Pause slightly between each element. American ATC accent.",
+      "questions": [
+        {
+          "type": "multiple_choice",
+          "question": "What is the destination airport?",
+          "options": ["Tashkent", "Kennedy", "MERIT", "Not mentioned"],
+          "correct": "Tashkent",
+          "explanation": "The clearance states 'cleared to Tashkent'"
+        },
+        {
+          "type": "fill_blank",
+          "question": "What is the initial altitude to maintain?",
+          "correct": "5,000",
+          "explanation": "Climb and maintain 5,000 feet"
+        },
+        {
+          "type": "fill_blank",
+          "question": "What is the squawk code?",
+          "correct": "4521",
+          "explanation": "Squawk 4521"
+        },
+        {
+          "type": "multiple_choice",
+          "question": "What altitude should the pilot expect after 10 minutes?",
+          "options": ["5,000 feet", "FL350", "FL250", "10,000 feet"],
+          "correct": "FL350",
+          "explanation": "'Expect flight level 350 ten minutes after departure'"
+        }
+      ],
+      "teaching_points": [
+        "Listen for 'cleared to' - this is the destination",
+        "'Climb and maintain' is the initial altitude",
+        "'Expect' is for planning only, not an actual clearance",
+        "Always write down the squawk code"
+      ],
+      "model_readback": "Cleared to Tashkent, Kennedy One departure, radar vectors MERIT, then as filed. Climb maintain 5,000, expect FL350 ten minutes after departure. Departure 125.9, squawk 4521, Uzbekistan Airways 653."
+    },
+    {
+      "id": "LSN-002",
+      "title": "Taxi Instructions with Hold Short",
+      "difficulty": 1,
+      "icao_level_target": 4,
+      "category": "ground_control",
+      "accent": "American - Standard",
+      "speed": "normal",
+      "duration_seconds": 18,
+      "scenario_type": "routine",
+      "transcript": "Aeroflot 215, taxi to runway 27 via Alpha, Bravo, hold short of runway 27L.",
+      "audio_generation_notes": "Normal pace. Emphasize 'hold short'. American accent.",
+      "questions": [
+        {
+          "type": "multiple_choice",
+          "question": "Which runway is the aircraft going to?",
+          "options": ["27", "27L", "Alpha", "Bravo"],
+          "correct": "27",
+          "explanation": "'Taxi to runway 27' is the destination runway"
+        },
+        {
+          "type": "fill_blank",
+          "question": "What taxiways should the aircraft use?",
+          "correct": "Alpha, Bravo",
+          "explanation": "'Via Alpha, Bravo'"
+        },
+        {
+          "type": "multiple_choice",
+          "question": "Where must the aircraft stop?",
+          "options": ["Runway 27", "Runway 27L", "Taxiway Alpha", "Taxiway Bravo"],
+          "correct": "Runway 27L",
+          "explanation": "'Hold short of runway 27L' - stop before crossing this runway"
+        }
+      ],
+      "teaching_points": [
+        "'Hold short' is a critical instruction - always read back",
+        "The destination runway (27) is different from the hold short runway (27L)",
+        "Write down the taxi route - you may need to refer to it"
+      ],
+      "model_readback": "Taxi to runway 27 via Alpha, Bravo, hold short runway 27L, Aeroflot 215."
+    },
+    {
+      "id": "LSN-003",
+      "title": "ATIS Information",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "category": "atis",
+      "accent": "American - Standard",
+      "speed": "normal",
+      "duration_seconds": 45,
+      "scenario_type": "routine",
+      "transcript": "John F Kennedy International Airport, information Charlie. Time 1755 Zulu. Wind 310 at 15, gusts 22. Visibility 10 miles. Few clouds at 4,500, broken 8,000. Temperature 12, dewpoint 08. Altimeter 2992. ILS runway 31L approach in use. Landing runways 31L and 31R. Departing runway 31L. Advise on initial contact you have information Charlie.",
+      "audio_generation_notes": "Steady, measured pace as automated ATIS. Clear pronunciation of numbers.",
+      "questions": [
+        {
+          "type": "fill_blank",
+          "question": "What is the ATIS information code?",
+          "correct": "Charlie",
+          "explanation": "Information Charlie"
+        },
+        {
+          "type": "multiple_choice",
+          "question": "What is the wind direction and speed?",
+          "options": ["310 at 15 gusts 22", "220 at 15", "310 at 22", "315 at 10"],
+          "correct": "310 at 15 gusts 22",
+          "explanation": "'Wind 310 at 15, gusts 22'"
+        },
+        {
+          "type": "fill_blank",
+          "question": "What is the altimeter setting?",
+          "correct": "2992",
+          "explanation": "Altimeter 2992 (inches of mercury)"
+        },
+        {
+          "type": "multiple_choice",
+          "question": "Which approach is in use?",
+          "options": ["ILS 31L", "ILS 31R", "Visual 31L", "RNAV 31L"],
+          "correct": "ILS 31L",
+          "explanation": "'ILS runway 31L approach in use'"
+        }
+      ],
+      "teaching_points": [
+        "Always note the ATIS code (Charlie, Delta, etc.)",
+        "Wind is given in degrees and knots",
+        "Altimeter setting must be set correctly for safe flight",
+        "You must advise ATC you have the ATIS information"
+      ],
+      "model_readback": "Information Charlie received."
+    },
+    {
+      "id": "LSN-004",
+      "title": "Traffic Information",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "category": "en_route",
+      "accent": "American - Fast",
+      "speed": "fast",
+      "duration_seconds": 15,
+      "scenario_type": "routine",
+      "transcript": "Emirates 502, traffic 2 o'clock, 8 miles, opposite direction, flight level 370, Airbus A380.",
+      "audio_generation_notes": "Fast pace. Controller sounds busy.",
+      "questions": [
+        {
+          "type": "multiple_choice",
+          "question": "Where is the traffic relative to the aircraft?",
+          "options": ["2 o'clock", "8 o'clock", "12 o'clock", "10 o'clock"],
+          "correct": "2 o'clock",
+          "explanation": "Traffic 2 o'clock means slightly to the right"
+        },
+        {
+          "type": "fill_blank",
+          "question": "How far away is the traffic?",
+          "correct": "8 miles",
+          "explanation": "Traffic is 8 miles away"
+        },
+        {
+          "type": "multiple_choice",
+          "question": "What direction is the traffic moving?",
+          "options": ["Opposite direction", "Same direction", "Crossing left to right", "Climbing"],
+          "correct": "Opposite direction",
+          "explanation": "The traffic is flying opposite direction (towards you)"
+        }
+      ],
+      "teaching_points": [
+        "Clock positions: 12 o'clock is straight ahead, 3 o'clock is right, 9 o'clock is left",
+        "'Opposite direction' means the traffic is flying towards you",
+        "Flight level tells you if the traffic is above, below, or at your level"
+      ],
+      "model_readback": "Looking for traffic, Emirates 502."
+    },
+    {
+      "id": "LSN-005",
+      "title": "Descent Clearance with Altimeter",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "category": "approach",
+      "accent": "British - London",
+      "speed": "normal",
+      "duration_seconds": 20,
+      "scenario_type": "routine",
+      "transcript": "Speedbird 178, descend flight level 160. When passing flight level 180, QNH 1013.",
+      "audio_generation_notes": "British ATC accent. Clear, professional.",
+      "questions": [
+        {
+          "type": "fill_blank",
+          "question": "What flight level should the aircraft descend to?",
+          "correct": "FL160",
+          "explanation": "'Descend flight level 160'"
+        },
+        {
+          "type": "multiple_choice",
+          "question": "When should the pilot set the altimeter?",
+          "options": ["Passing FL180", "Passing FL160", "Immediately", "At 10,000 feet"],
+          "correct": "Passing FL180",
+          "explanation": "'When passing flight level 180, QNH 1013'"
+        },
+        {
+          "type": "fill_blank",
+          "question": "What is the QNH setting?",
+          "correct": "1013",
+          "explanation": "QNH 1013 hectopascals"
+        }
+      ],
+      "teaching_points": [
+        "FL180 is typically the transition level in Europe",
+        "QNH is given in hectopascals (millibars) outside the US",
+        "Set the altimeter at the transition level when descending"
+      ],
+      "model_readback": "Descend FL160, QNH 1013 when passing FL180, Speedbird 178."
+    },
+    {
+      "id": "LSN-006",
+      "title": "Weather Deviation Request",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "category": "en_route",
+      "accent": "American - Standard",
+      "speed": "normal",
+      "duration_seconds": 22,
+      "scenario_type": "non_routine",
+      "transcript": "Singapore 21, deviation approved, left or right of track approved. Report when able direct to PAPA.",
+      "audio_generation_notes": "Professional tone. Pilot would have just requested deviation for weather.",
+      "questions": [
+        {
+          "type": "multiple_choice",
+          "question": "What is approved?",
+          "options": ["Deviation left or right", "Only left deviation", "Only right deviation", "Direct to PAPA"],
+          "correct": "Deviation left or right",
+          "explanation": "'Left or right of track approved'"
+        },
+        {
+          "type": "fill_blank",
+          "question": "Where should the pilot report when able?",
+          "correct": "PAPA",
+          "explanation": "'Report when able direct to PAPA'"
+        }
+      ],
+      "teaching_points": [
+        "Weather deviations require ATC approval",
+        "ATC may approve both left and right options for flexibility",
+        "'Report when able' means tell ATC when you can return to route"
+      ],
+      "model_readback": "Deviation approved left or right, will report when able direct PAPA, Singapore 21."
+    },
+    {
+      "id": "LSN-007",
+      "title": "Runway Change",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "category": "approach",
+      "accent": "British - Regional",
+      "speed": "normal",
+      "duration_seconds": 25,
+      "scenario_type": "non_routine",
+      "transcript": "Virgin 407, due wind change, expect runway 09 instead of 27. Say your intentions.",
+      "audio_generation_notes": "British regional accent. Professional but with urgency.",
+      "questions": [
+        {
+          "type": "multiple_choice",
+          "question": "Why is the runway changing?",
+          "options": ["Wind change", "Traffic", "Emergency", "Runway contamination"],
+          "correct": "Wind change",
+          "explanation": "'Due wind change'"
+        },
+        {
+          "type": "fill_blank",
+          "question": "What runway should the pilot now expect?",
+          "correct": "09",
+          "explanation": "'Expect runway 09 instead of 27'"
+        },
+        {
+          "type": "multiple_choice",
+          "question": "What does ATC want the pilot to do?",
+          "options": ["State intentions", "Continue approach", "Go around", "Hold"],
+          "correct": "State intentions",
+          "explanation": "'Say your intentions'"
+        }
+      ],
+      "teaching_points": [
+        "Runway changes affect approach briefing and fuel planning",
+        "'Say your intentions' requires a response about what you plan to do",
+        "Wind changes often lead to runway direction changes"
+      ],
+      "model_readback": "Expect runway 09, we can accept, Virgin 407."
+    },
+    {
+      "id": "LSN-008",
+      "title": "Go-Around Instruction",
+      "difficulty": 3,
+      "icao_level_target": 4,
+      "category": "tower",
+      "accent": "American - Fast",
+      "speed": "fast",
+      "duration_seconds": 12,
+      "scenario_type": "non_routine",
+      "transcript": "United 472, go around, I say again go around, traffic on the runway.",
+      "audio_generation_notes": "Urgent tone. Fast delivery. Repeated instruction.",
+      "questions": [
+        {
+          "type": "multiple_choice",
+          "question": "What instruction is given?",
+          "options": ["Go around", "Continue approach", "Land", "Hold short"],
+          "correct": "Go around",
+          "explanation": "'Go around, I say again go around'"
+        },
+        {
+          "type": "multiple_choice",
+          "question": "Why is the go-around required?",
+          "options": ["Traffic on runway", "Wind shear", "Weather", "Equipment failure"],
+          "correct": "Traffic on runway",
+          "explanation": "'Traffic on the runway'"
+        }
+      ],
+      "teaching_points": [
+        "'I say again' indicates urgency - act immediately",
+        "Go-around is a critical instruction - comply first, ask questions later",
+        "Traffic on runway is a serious safety issue"
+      ],
+      "model_readback": "Going around, United 472."
+    },
+    {
+      "id": "LSN-009",
+      "title": "Engine Failure Report",
+      "difficulty": 3,
+      "icao_level_target": 4,
+      "category": "emergency",
+      "accent": "American - Standard",
+      "speed": "normal",
+      "duration_seconds": 30,
+      "scenario_type": "emergency",
+      "transcript": "Mayday, Mayday, Mayday. Delta 456 heavy, engine failure, engine number 2. Position 50 miles northeast of ROMEO. Descending to flight level 300. Souls on board 287. Fuel remaining 3 hours. Request vectors to nearest suitable airport.",
+      "audio_generation_notes": "Calm but serious pilot voice. Clear pronunciation despite emergency.",
+      "questions": [
+        {
+          "type": "fill_blank",
+          "question": "Which engine has failed?",
+          "correct": "Engine 2",
+          "explanation": "'Engine failure, engine number 2'"
+        },
+        {
+          "type": "fill_blank",
+          "question": "How many souls are on board?",
+          "correct": "287",
+          "explanation": "'Souls on board 287'"
+        },
+        {
+          "type": "multiple_choice",
+          "question": "What is the pilot requesting?",
+          "options": ["Vectors to nearest airport", "Return to departure airport", "Continue to destination", "Hold for troubleshooting"],
+          "correct": "Vectors to nearest airport",
+          "explanation": "'Request vectors to nearest suitable airport'"
+        }
+      ],
+      "teaching_points": [
+        "Mayday format: say Mayday three times",
+        "Include: callsign, nature of emergency, position, intentions, souls, fuel",
+        "Stay calm and provide clear information"
+      ],
+      "model_readback": "[ATC acknowledges and provides priority handling]"
+    },
+    {
+      "id": "LSN-010",
+      "title": "Medical Emergency",
+      "difficulty": 3,
+      "icao_level_target": 4,
+      "category": "emergency",
+      "accent": "Indian - Mumbai",
+      "speed": "normal",
+      "duration_seconds": 28,
+      "scenario_type": "emergency",
+      "transcript": "Pan-Pan, Pan-Pan, Pan-Pan. Air India 505, medical emergency. Passenger unconscious. Requesting priority handling and medical assistance on arrival. Position 200 miles south of DELHI. Estimating DELHI in 25 minutes.",
+      "audio_generation_notes": "Indian accent. Professional, calm despite urgency.",
+      "questions": [
+        {
+          "type": "multiple_choice",
+          "question": "What type of emergency call is this?",
+          "options": ["Pan-Pan (Urgency)", "Mayday (Distress)", "Securité (Safety)", "Routine"],
+          "correct": "Pan-Pan (Urgency)",
+          "explanation": "'Pan-Pan, Pan-Pan, Pan-Pan' is an urgency call, not immediately life-threatening to the aircraft"
+        },
+        {
+          "type": "fill_blank",
+          "question": "What is the nature of the emergency?",
+          "correct": "Medical emergency, passenger unconscious",
+          "explanation": "'Medical emergency. Passenger unconscious.'"
+        },
+        {
+          "type": "fill_blank",
+          "question": "How long until arrival at Delhi?",
+          "correct": "25 minutes",
+          "explanation": "'Estimating DELHI in 25 minutes'"
+        }
+      ],
+      "teaching_points": [
+        "Pan-Pan is for urgency, Mayday is for life-threatening distress",
+        "Medical emergencies typically use Pan-Pan unless aircraft safety is affected",
+        "Request 'medical assistance on arrival' so airport can prepare"
+      ],
+      "model_readback": "Air India 505, roger your Pan-Pan, medical assistance will be standing by."
+    },
+    {
+      "id": "LSN-011",
+      "title": "Wind Shear Warning",
+      "difficulty": 3,
+      "icao_level_target": 4,
+      "category": "approach",
+      "accent": "American - Standard",
+      "speed": "fast",
+      "duration_seconds": 18,
+      "scenario_type": "non_routine",
+      "transcript": "All aircraft, wind shear alert. Loss of 20 knots at 300 feet on final runway 22. Previous aircraft reported go-around.",
+      "audio_generation_notes": "Broadcast to all aircraft. Urgent but professional.",
+      "questions": [
+        {
+          "type": "fill_blank",
+          "question": "How much wind shear is reported?",
+          "correct": "Loss of 20 knots",
+          "explanation": "'Loss of 20 knots' means airspeed decreases by 20 knots"
+        },
+        {
+          "type": "fill_blank",
+          "question": "At what altitude was the wind shear encountered?",
+          "correct": "300 feet",
+          "explanation": "'At 300 feet on final'"
+        },
+        {
+          "type": "multiple_choice",
+          "question": "What did the previous aircraft do?",
+          "options": ["Go around", "Land successfully", "Divert", "Hold"],
+          "correct": "Go around",
+          "explanation": "'Previous aircraft reported go-around'"
+        }
+      ],
+      "teaching_points": [
+        "Wind shear 'loss' is dangerous - aircraft loses lift suddenly",
+        "'All aircraft' is a broadcast warning for everyone",
+        "If previous aircraft went around, conditions are serious"
+      ],
+      "model_readback": "Copied wind shear, loss 20 knots at 300 feet, [callsign]."
+    },
+    {
+      "id": "LSN-012",
+      "title": "Holding Instructions",
+      "difficulty": 3,
+      "icao_level_target": 5,
+      "category": "en_route",
+      "accent": "British - London",
+      "speed": "normal",
+      "duration_seconds": 25,
+      "scenario_type": "non_routine",
+      "transcript": "Lufthansa 450, hold at BIGGIN, inbound track 270, right-hand pattern, one minute legs. Expect approach time 1430.",
+      "audio_generation_notes": "British ATC. Clear, measured delivery.",
+      "questions": [
+        {
+          "type": "fill_blank",
+          "question": "Where should the aircraft hold?",
+          "correct": "BIGGIN",
+          "explanation": "'Hold at BIGGIN'"
+        },
+        {
+          "type": "multiple_choice",
+          "question": "What is the direction of turns in the holding pattern?",
+          "options": ["Right-hand turns", "Left-hand turns", "Either direction", "Straight ahead"],
+          "correct": "Right-hand turns",
+          "explanation": "'Right-hand pattern'"
+        },
+        {
+          "type": "fill_blank",
+          "question": "What time should the pilot expect to begin approach?",
+          "correct": "1430",
+          "explanation": "'Expect approach time 1430'"
+        }
+      ],
+      "teaching_points": [
+        "Holding instructions include: fix, inbound track, direction, leg length",
+        "Standard holding is right-hand turns unless specified otherwise",
+        "Expect approach time helps with fuel planning"
+      ],
+      "model_readback": "Hold BIGGIN, inbound 270, right-hand, one minute legs, expect approach 1430, Lufthansa 450."
+    }
+  ],
+
+  "speaking_scenarios": [
+    {
+      "id": "SPK-001",
+      "title": "IFR Clearance Readback",
+      "difficulty": 1,
+      "icao_level_target": 4,
+      "category": "phraseology",
+      "scenario_type": "routine",
+      "setup": "You are the pilot of flight HY653, an Uzbekistan Airways flight at Tashkent. You have received your IFR clearance and must read it back.",
+      "atc_prompt_text": "Uzbekistan Airways 653, cleared to Moscow via the TASHKENT ONE departure, flight planned route. Climb and maintain 6,000, expect flight level 390 ten minutes after departure. Departure frequency 121.7. Squawk 3241.",
+      "expected_elements": [
+        "Destination (Moscow)",
+        "Departure procedure (TASHKENT ONE)",
+        "Initial altitude (6,000)",
+        "Expected cruise level (FL390)",
+        "Departure frequency (121.7)",
+        "Squawk code (3241)",
+        "Callsign at end"
+      ],
+      "sample_response": "Cleared to Moscow, TASHKENT ONE departure, flight planned route. Climb maintain 6,000, expect flight level 390 ten minutes after departure. Departure 121.7, squawk 3241, Uzbekistan Airways 653.",
+      "scoring_rubric": {
+        "vocabulary": "Uses correct aviation terms: cleared, maintain, departure, squawk",
+        "structure": "Correct order of clearance elements",
+        "pronunciation": "Clear pronunciation of numbers and names",
+        "fluency": "Smooth delivery without long pauses"
+      },
+      "common_cis_errors": [
+        "Saying 'flight level three nine zero' instead of 'flight level three niner zero'",
+        "Pronouncing 'th' as 'd' in 'three'",
+        "Adding unnecessary words like 'I am cleared' instead of just 'cleared'"
+      ]
+    },
+    {
+      "id": "SPK-002",
+      "title": "Position Report",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "category": "phraseology",
+      "scenario_type": "routine",
+      "setup": "You are flying at FL350 and have just passed waypoint ROMEO. You need to make a position report to ATC.",
+      "atc_prompt_text": "Air Astana 714, report passing ROMEO.",
+      "expected_elements": [
+        "Callsign",
+        "Position (ROMEO)",
+        "Time over position",
+        "Flight level (FL350)",
+        "Next waypoint",
+        "Estimated time at next waypoint"
+      ],
+      "sample_response": "Air Astana 714, position ROMEO at 1435, flight level 350, estimating BRAVO at 1502, next CHARLIE.",
+      "scoring_rubric": {
+        "vocabulary": "Uses position report format correctly",
+        "structure": "Logical sequence of information",
+        "pronunciation": "Clear waypoint and number pronunciation",
+        "fluency": "Delivered without significant hesitation"
+      },
+      "common_cis_errors": [
+        "Forgetting to include time over position",
+        "Saying 'I am at' instead of 'position'",
+        "Mispronouncing waypoint names"
+      ]
+    },
+    {
+      "id": "SPK-003",
+      "title": "Request Weather Deviation",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "category": "phraseology",
+      "scenario_type": "non_routine",
+      "setup": "You are flying at FL380 and see thunderstorms ahead on your weather radar. You need to request a deviation.",
+      "atc_prompt_text": "[Pilot initiates request]",
+      "expected_elements": [
+        "Callsign",
+        "Current position",
+        "Request for deviation",
+        "Direction of deviation (left/right)",
+        "Miles of deviation",
+        "Reason (weather)"
+      ],
+      "sample_response": "Tokyo Control, Korean Air 085, position 50 miles south of SIERRA. Request deviation 30 miles right of track due weather.",
+      "scoring_rubric": {
+        "vocabulary": "Correct use of 'deviation', 'due weather'",
+        "structure": "Request format is clear and complete",
+        "pronunciation": "Numbers and directions are clear",
+        "fluency": "Calm, professional delivery"
+      },
+      "common_cis_errors": [
+        "Saying 'because of weather' instead of 'due weather'",
+        "Not specifying direction or distance",
+        "Sounding uncertain or hesitant"
+      ]
+    },
+    {
+      "id": "SPK-004",
+      "title": "Declaring Fuel Emergency",
+      "difficulty": 3,
+      "icao_level_target": 4,
+      "category": "emergency",
+      "scenario_type": "emergency",
+      "setup": "You are 100 miles from destination but have been holding for 45 minutes due to weather. Your fuel is now minimum. You must declare an emergency.",
+      "atc_prompt_text": "[Pilot initiates emergency declaration]",
+      "expected_elements": [
+        "Mayday or Pan-Pan (Pan-Pan is appropriate for minimum fuel)",
+        "Callsign",
+        "Nature of emergency (minimum fuel)",
+        "Position",
+        "Fuel remaining",
+        "Souls on board",
+        "Request (priority handling)"
+      ],
+      "sample_response": "Pan-Pan, Pan-Pan, Pan-Pan. Thai 622, minimum fuel emergency. Position 100 miles east of destination. Fuel remaining 45 minutes. 210 souls on board. Request immediate approach and priority landing.",
+      "scoring_rubric": {
+        "vocabulary": "Correct emergency terminology",
+        "structure": "Complete emergency declaration format",
+        "pronunciation": "Clear despite urgency",
+        "fluency": "Calm, controlled delivery",
+        "interaction": "Provides all necessary information proactively"
+      },
+      "common_cis_errors": [
+        "Using Mayday when Pan-Pan is appropriate",
+        "Forgetting souls on board",
+        "Speaking too fast due to stress"
+      ]
+    },
+    {
+      "id": "SPK-005",
+      "title": "Engine Fire Declaration",
+      "difficulty": 3,
+      "icao_level_target": 4,
+      "category": "emergency",
+      "scenario_type": "emergency",
+      "setup": "You have just received an engine fire warning on your number 2 engine. You must declare an emergency and request return to departure airport.",
+      "atc_prompt_text": "[Pilot initiates emergency declaration]",
+      "expected_elements": [
+        "Mayday (three times)",
+        "Callsign",
+        "Nature of emergency (engine fire)",
+        "Which engine",
+        "Current position/altitude",
+        "Intentions (return to departure)",
+        "Souls on board",
+        "Fuel remaining"
+      ],
+      "sample_response": "Mayday, Mayday, Mayday. Emirates 507, engine fire, engine number 2. Position 30 miles east of Dubai, flight level 280. Shutting down engine 2. Request immediate return to Dubai. 312 souls on board, 5 hours fuel remaining.",
+      "scoring_rubric": {
+        "vocabulary": "Correct Mayday format and terminology",
+        "structure": "Clear, logical sequence",
+        "pronunciation": "Calm, clear pronunciation",
+        "fluency": "Steady pace despite emergency",
+        "comprehension": "Addresses all required elements",
+        "interaction": "Provides complete information"
+      },
+      "common_cis_errors": [
+        "Not saying Mayday three times",
+        "Forgetting to specify which engine",
+        "Panicked delivery",
+        "Missing souls or fuel information"
+      ]
+    },
+    {
+      "id": "SPK-006",
+      "title": "Go-Around Announcement",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "category": "phraseology",
+      "scenario_type": "non_routine",
+      "setup": "You are on final approach but the runway is not clear. You must execute a go-around and advise ATC.",
+      "atc_prompt_text": "United 472, runway occupied, go around.",
+      "expected_elements": [
+        "Going around acknowledgment",
+        "Callsign"
+      ],
+      "sample_response": "Going around, United 472.",
+      "scoring_rubric": {
+        "vocabulary": "Uses 'going around' not 'I am going around'",
+        "structure": "Concise, immediate response",
+        "pronunciation": "Clear",
+        "fluency": "Immediate response"
+      },
+      "common_cis_errors": [
+        "Hesitating before responding",
+        "Asking 'why' before complying",
+        "Saying 'I am going around' instead of 'going around'"
+      ]
+    },
+    {
+      "id": "SPK-007",
+      "title": "Unable to Comply",
+      "difficulty": 2,
+      "icao_level_target": 4,
+      "category": "phraseology",
+      "scenario_type": "non_routine",
+      "setup": "ATC has instructed you to descend to FL250, but you cannot comply because of weather at that altitude.",
+      "atc_prompt_text": "Singapore 381, descend and maintain flight level 250.",
+      "expected_elements": [
+        "Unable",
+        "Reason (weather/turbulence)",
+        "Request alternative",
+        "Callsign"
+      ],
+      "sample_response": "Unable FL250, weather. Request maintain FL300 or higher, Singapore 381.",
+      "scoring_rubric": {
+        "vocabulary": "Uses 'unable' correctly",
+        "structure": "Reason follows immediately",
+        "pronunciation": "Clear 'unable'",
+        "interaction": "Offers alternative solution"
+      },
+      "common_cis_errors": [
+        "Saying 'cannot' instead of 'unable'",
+        "Not providing reason",
+        "Not offering alternative"
+      ]
+    },
+    {
+      "id": "SPK-008",
+      "title": "Requesting Higher Altitude",
+      "difficulty": 1,
+      "icao_level_target": 4,
+      "category": "phraseology",
+      "scenario_type": "routine",
+      "setup": "You are cruising at FL350 but experiencing moderate turbulence. You want to request a higher altitude.",
+      "atc_prompt_text": "[Pilot initiates request]",
+      "expected_elements": [
+        "Callsign",
+        "Current conditions (turbulence)",
+        "Request",
+        "Desired altitude"
+      ],
+      "sample_response": "Mumbai Control, Qatar 75, moderate turbulence at FL350. Request climb to FL390.",
+      "scoring_rubric": {
+        "vocabulary": "Correct use of 'request', 'moderate turbulence'",
+        "structure": "Clear request format",
+        "pronunciation": "Numbers clear",
+        "fluency": "Professional delivery"
+      },
+      "common_cis_errors": [
+        "Saying 'I want' instead of 'request'",
+        "Not stating current conditions",
+        "Pronouncing 'turbulence' incorrectly"
+      ]
+    },
+    {
+      "id": "SPK-009",
+      "title": "Radio Check",
+      "difficulty": 1,
+      "icao_level_target": 4,
+      "category": "phraseology",
+      "scenario_type": "routine",
+      "setup": "You have just changed frequency and need to confirm your radio is working.",
+      "atc_prompt_text": "[Pilot initiates radio check]",
+      "expected_elements": [
+        "Station name",
+        "Callsign",
+        "Radio check request"
+      ],
+      "sample_response": "London Control, Uzbekistan Airways 653, radio check.",
+      "scoring_rubric": {
+        "vocabulary": "Uses 'radio check' format",
+        "structure": "Correct order",
+        "pronunciation": "Clear",
+        "fluency": "Concise"
+      },
+      "common_cis_errors": [
+        "Saying 'check radio' instead of 'radio check'",
+        "Adding unnecessary words",
+        "Incorrect station name"
+      ]
+    },
+    {
+      "id": "SPK-010",
+      "title": "Medical Emergency - Passenger",
+      "difficulty": 3,
+      "icao_level_target": 4,
+      "category": "emergency",
+      "scenario_type": "emergency",
+      "setup": "A passenger has collapsed and is unresponsive. The cabin crew has requested you divert to the nearest airport for medical assistance.",
+      "atc_prompt_text": "[Pilot initiates emergency declaration]",
+      "expected_elements": [
+        "Pan-Pan (three times)",
+        "Callsign",
+        "Nature of emergency (medical)",
+        "Description of situation",
+        "Request (divert, medical assistance)",
+        "Souls on board",
+        "Fuel remaining"
+      ],
+      "sample_response": "Pan-Pan, Pan-Pan, Pan-Pan. ABC123, medical emergency. Passenger unconscious, not breathing. Request immediate divert to nearest suitable airport. Require medical assistance on arrival. 180 souls on board, 4 hours fuel remaining.",
+      "scoring_rubric": {
+        "vocabulary": "Correct Pan-Pan format, medical terminology",
+        "structure": "Logical flow of information",
+        "pronunciation": "Clear despite stress",
+        "fluency": "Calm, controlled",
+        "comprehension": "Complete information provided",
+        "interaction": "Proactive communication"
+      },
+      "common_cis_errors": [
+        "Using Mayday instead of Pan-Pan",
+        "Not specifying medical assistance needed",
+        "Forgetting souls/fuel",
+        "Panic in voice"
+      ]
+    }
+  ],
+
+  "phonetic_alphabet": {
+    "letters": {
+      "A": { "word": "Alpha", "phonetic": "/ˈælfə/", "cis_tip": "AL-fah, not 'alfa'" },
+      "B": { "word": "Bravo", "phonetic": "/ˈbrɑːvoʊ/", "cis_tip": "BRAH-voh, not 'bravo'" },
+      "C": { "word": "Charlie", "phonetic": "/ˈtʃɑːrli/", "cis_tip": "CHAR-lee" },
+      "D": { "word": "Delta", "phonetic": "/ˈdeltə/", "cis_tip": "DEL-tah" },
+      "E": { "word": "Echo", "phonetic": "/ˈekoʊ/", "cis_tip": "EK-oh" },
+      "F": { "word": "Foxtrot", "phonetic": "/ˈfɒkstrɒt/", "cis_tip": "FOKS-trot" },
+      "G": { "word": "Golf", "phonetic": "/ɡɒlf/", "cis_tip": "GOLF" },
+      "H": { "word": "Hotel", "phonetic": "/hoʊˈtel/", "cis_tip": "hoh-TEL, stress on second syllable" },
+      "I": { "word": "India", "phonetic": "/ˈɪndiə/", "cis_tip": "IN-dee-ah" },
+      "J": { "word": "Juliet", "phonetic": "/ˈdʒuːliˌet/", "cis_tip": "JOO-lee-et" },
+      "K": { "word": "Kilo", "phonetic": "/ˈkiːloʊ/", "cis_tip": "KEE-loh" },
+      "L": { "word": "Lima", "phonetic": "/ˈliːmə/", "cis_tip": "LEE-mah" },
+      "M": { "word": "Mike", "phonetic": "/maɪk/", "cis_tip": "MIKE" },
+      "N": { "word": "November", "phonetic": "/noʊˈvembər/", "cis_tip": "noh-VEM-ber" },
+      "O": { "word": "Oscar", "phonetic": "/ˈɒskər/", "cis_tip": "OSS-kar" },
+      "P": { "word": "Papa", "phonetic": "/pəˈpɑː/", "cis_tip": "pah-PAH, stress on second" },
+      "Q": { "word": "Quebec", "phonetic": "/kəˈbek/", "cis_tip": "keh-BEK" },
+      "R": { "word": "Romeo", "phonetic": "/ˈroʊmioʊ/", "cis_tip": "ROH-mee-oh" },
+      "S": { "word": "Sierra", "phonetic": "/siˈerə/", "cis_tip": "see-ERR-ah" },
+      "T": { "word": "Tango", "phonetic": "/ˈtæŋɡoʊ/", "cis_tip": "TANG-goh" },
+      "U": { "word": "Uniform", "phonetic": "/ˈjuːnɪfɔːrm/", "cis_tip": "YOO-nee-form" },
+      "V": { "word": "Victor", "phonetic": "/ˈvɪktər/", "cis_tip": "VIK-ter" },
+      "W": { "word": "Whiskey", "phonetic": "/ˈwɪski/", "cis_tip": "WISS-kee, start with W not V" },
+      "X": { "word": "X-ray", "phonetic": "/ˈeksreɪ/", "cis_tip": "EKS-ray" },
+      "Y": { "word": "Yankee", "phonetic": "/ˈjæŋki/", "cis_tip": "YANG-kee" },
+      "Z": { "word": "Zulu", "phonetic": "/ˈzuːluː/", "cis_tip": "ZOO-loo" }
+    },
+    "numbers": {
+      "0": { "word": "Zero", "phonetic": "/ˈzɪəroʊ/", "cis_tip": "ZEE-roh" },
+      "1": { "word": "One", "phonetic": "/wʌn/", "cis_tip": "WUN, start with W" },
+      "2": { "word": "Two", "phonetic": "/tuː/", "cis_tip": "TOO" },
+      "3": { "word": "Tree", "phonetic": "/triː/", "cis_tip": "TREE, not 'three' - practice TH->TR" },
+      "4": { "word": "Fower", "phonetic": "/ˈfoʊər/", "cis_tip": "FOW-er, two syllables" },
+      "5": { "word": "Fife", "phonetic": "/faɪf/", "cis_tip": "FIFE, not 'five'" },
+      "6": { "word": "Six", "phonetic": "/sɪks/", "cis_tip": "SIX" },
+      "7": { "word": "Seven", "phonetic": "/ˈsevən/", "cis_tip": "SEV-en" },
+      "8": { "word": "Eight", "phonetic": "/eɪt/", "cis_tip": "AIT" },
+      "9": { "word": "Niner", "phonetic": "/ˈnaɪnər/", "cis_tip": "NINE-er, not just 'nine'" },
+      "100": { "word": "Hundred", "phonetic": "/ˈhʌndrəd/", "cis_tip": "HUN-dred" },
+      "1000": { "word": "Thousand", "phonetic": "/ˈθaʊzənd/", "cis_tip": "THOU-zand, practice TH" },
+      ".": { "word": "Decimal", "phonetic": "/ˈdesɪməl/", "cis_tip": "DES-i-mal" }
+    }
+  },
+
+  "common_cis_pronunciation_errors": [
+    {
+      "error_type": "TH sounds",
+      "examples": ["three→tree (correct in aviation)", "think→sink", "the→ze", "weather→veather"],
+      "explanation": "Russian has no TH sound. In aviation, 'three' is pronounced 'tree' which actually helps!",
+      "practice_words": ["thousand", "this", "that", "weather", "thermal", "thrust"]
+    },
+    {
+      "error_type": "W vs V confusion",
+      "examples": ["west→vest", "wind→vind", "runway→runvay"],
+      "explanation": "Russian W sounds like V. Practice: lips round for W, teeth touch lip for V.",
+      "practice_words": ["wind", "west", "whiskey", "waypoint", "wilco", "weather"]
+    },
+    {
+      "error_type": "Long vs short vowels",
+      "examples": ["ship/sheep", "bit/beat", "pull/pool"],
+      "explanation": "Russian doesn't distinguish vowel length. Can change word meaning.",
+      "practice_words": ["feet/fit", "leave/live", "heat/hit"]
+    },
+    {
+      "error_type": "Word stress",
+      "examples": ["turbulence (TUR-bu-lence not tur-BU-lence)", "maintain (main-TAIN not MAIN-tain)"],
+      "explanation": "English stress patterns differ from Russian. Stress wrong syllable = hard to understand.",
+      "practice_words": ["departure", "approach", "emergency", "altitude", "helicopter"]
+    },
+    {
+      "error_type": "Final consonant devoicing",
+      "examples": ["bad→bat", "dog→dock", "five→fife (correct in aviation!)"],
+      "explanation": "Russian devoices final consonants. In English this changes meaning.",
+      "practice_words": ["rub/rup", "dog/dock", "bag/back"]
+    },
+    {
+      "error_type": "H sound",
+      "examples": ["hotel→otel", "heading→eading", "hold→old"],
+      "explanation": "H is often dropped or made too guttural. Should be soft breath.",
+      "practice_words": ["heading", "hold", "helicopter", "hundred", "heavy"]
+    }
+  ]
+}
