@@ -117,7 +117,7 @@ export interface ListeningStats {
  */
 export function useListeningExercises(filters?: ListeningFiltersRequest) {
   return useQuery({
-    queryKey: queryKeys.listening.exercises(filters),
+    queryKey: queryKeys.listening.exercises(filters as Record<string, unknown>),
     queryFn: () => api.get<ListeningExercisesResponse>('/listening/exercises', {
       params: filters as Record<string, string | number | undefined>,
     }),
