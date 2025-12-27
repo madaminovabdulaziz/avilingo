@@ -4,6 +4,7 @@ Authentication Service
 Business logic for user authentication, registration, and token management.
 """
 
+import logging
 from datetime import datetime, timedelta
 from typing import Optional, Tuple
 from sqlalchemy.orm import Session
@@ -20,6 +21,9 @@ from app.core.security import (
     decode_token,
 )
 from app.core.config import settings
+from app.services.email_service import generate_verification_code, send_verification_email
+
+logger = logging.getLogger(__name__)
 
 
 class AuthService:
@@ -46,15 +50,15 @@ class AuthService:
     # Registration
     # =========================================================================
     
-    def register_user(self, data: RegisterRequest) -> Tuple[User, TokenResponse]:
+    def register_user(self, data: RegisterRequest) -> User:
         """
-        Register a new user.
+        Register a new user with email verification required.
         
         Args:
             data: Registration request data
             
         Returns:
-            Tuple of (user, tokens)
+            User object (unverified)
             
         Raises:
             ValueError: If email already exists
@@ -63,6 +67,12 @@ class AuthService:
         existing = self.get_user_by_email(data.email)
         if existing:
             raise ValueError("Email already registered")
+        
+        # Generate verification code
+        verification_code = generate_verification_code()
+        code_expires_at = datetime.utcnow() + timedelta(
+            minutes=settings.VERIFICATION_CODE_EXPIRE_MINUTES
+        )
         
         # Create user
         user = User(
@@ -74,6 +84,9 @@ class AuthService:
             subscription_tier=SubscriptionTier.FREE,
             is_active=True,
             is_verified=False,
+            verification_code=verification_code,
+            verification_code_expires_at=code_expires_at,
+            verification_attempts=0,
         )
         
         # Parse test date if provided
@@ -95,10 +108,118 @@ class AuthService:
         self.db.commit()
         self.db.refresh(user)
         
-        # Generate tokens
-        tokens = self._create_tokens(user.id)
+        logger.info(f"New user registered (pending verification): {user.email}")
         
-        return user, tokens
+        return user
+    
+    # =========================================================================
+    # Email Verification
+    # =========================================================================
+    
+    def verify_email(
+        self, 
+        email: str, 
+        code: str
+    ) -> Tuple[Optional[User], str]:
+        """
+        Verify user's email with the provided code.
+        
+        Args:
+            email: User's email address
+            code: 6-digit verification code
+            
+        Returns:
+            Tuple of (User if successful else None, error_message if failed)
+        """
+        user = self.get_user_by_email(email)
+        
+        if not user:
+            logger.warning(f"Verification attempt for non-existent email: {email[:3]}***")
+            return None, "User not found"
+        
+        if user.is_verified:
+            logger.info(f"User already verified: {email[:3]}***")
+            return None, "Email already verified"
+        
+        # Check if code has expired
+        if not user.verification_code_expires_at:
+            logger.warning(f"No verification code set for user: {email[:3]}***")
+            return None, "No verification code found. Please request a new code."
+        
+        if datetime.utcnow() > user.verification_code_expires_at:
+            logger.warning(f"Expired verification code for: {email[:3]}***")
+            return None, "Verification code expired"
+        
+        # Check if too many failed attempts (5 max)
+        if user.verification_attempts >= 5:
+            # Clear the code after 5 failed attempts - user must request new code
+            user.verification_code = None
+            user.verification_code_expires_at = None
+            user.verification_attempts = 0
+            self.db.commit()
+            logger.warning(f"Too many failed attempts, code cleared for: {email[:3]}***")
+            return None, "Too many failed attempts. Please request a new code."
+        
+        # Verify the code
+        if user.verification_code != code:
+            user.verification_attempts += 1
+            self.db.commit()
+            remaining = 5 - user.verification_attempts
+            logger.warning(
+                f"Invalid verification code for {email[:3]}***, "
+                f"attempts: {user.verification_attempts}/5"
+            )
+            return None, f"Invalid verification code. {remaining} attempts remaining."
+        
+        # Success! Mark as verified and clear code
+        user.is_verified = True
+        user.verification_code = None
+        user.verification_code_expires_at = None
+        user.verification_attempts = 0
+        user.updated_at = datetime.utcnow()
+        self.db.commit()
+        self.db.refresh(user)
+        
+        logger.info(f"Email verified successfully: {email[:3]}***")
+        
+        return user, ""
+    
+    def resend_verification_code(self, email: str) -> Tuple[Optional[User], str]:
+        """
+        Generate and set a new verification code for the user.
+        
+        Args:
+            email: User's email address
+            
+        Returns:
+            Tuple of (User if successful else None, error_message if failed)
+        """
+        user = self.get_user_by_email(email)
+        
+        if not user:
+            logger.warning(f"Resend code attempt for non-existent email: {email[:3]}***")
+            return None, "User not found"
+        
+        if user.is_verified:
+            logger.info(f"Resend code for already verified user: {email[:3]}***")
+            return None, "Email already verified"
+        
+        # Generate new code
+        verification_code = generate_verification_code()
+        code_expires_at = datetime.utcnow() + timedelta(
+            minutes=settings.VERIFICATION_CODE_EXPIRE_MINUTES
+        )
+        
+        user.verification_code = verification_code
+        user.verification_code_expires_at = code_expires_at
+        user.verification_attempts = 0  # Reset attempts on new code
+        user.updated_at = datetime.utcnow()
+        self.db.commit()
+        self.db.refresh(user)
+        
+        logger.info(f"New verification code generated for: {email[:3]}***")
+        
+        return user, ""
     
     # =========================================================================
     # Login
@@ -130,7 +251,11 @@ class AuthService:
         
         return user
     
-    def login(self, email: str, password: str) -> Optional[Tuple[User, TokenResponse]]:
+    def login(
+        self, 
+        email: str, 
+        password: str
+    ) -> Tuple[Optional[User], Optional[TokenResponse], str]:
         """
         Login user and return tokens.
         
@@ -139,12 +264,20 @@ class AuthService:
             password: User's password
             
         Returns:
-            Tuple of (user, tokens) if successful, None otherwise
+            Tuple of (user, tokens, error_code)
+            - If successful: (user, tokens, "")
+            - If invalid credentials: (None, None, "INVALID_CREDENTIALS")
+            - If email not verified: (user, None, "EMAIL_NOT_VERIFIED")
         """
         user = self.authenticate_user(email, password)
         
         if not user:
-            return None
+            return None, None, "INVALID_CREDENTIALS"
+        
+        # Check if email is verified
+        if not user.is_verified:
+            logger.warning(f"Login attempt by unverified user: {email[:3]}***")
+            return user, None, "EMAIL_NOT_VERIFIED"
         
         # Update last login
         user.last_login_at = datetime.utcnow()
@@ -153,7 +286,7 @@ class AuthService:
         # Generate tokens
         tokens = self._create_tokens(user.id)
         
-        return user, tokens
+        return user, tokens, ""
     
     # =========================================================================
     # Token Operations

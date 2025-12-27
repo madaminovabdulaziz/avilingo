@@ -67,6 +67,23 @@ class User(Base):
     is_active: Mapped[bool] = mapped_column(default=True)
     is_verified: Mapped[bool] = mapped_column(default=False)
     
+    # Email verification
+    verification_code: Mapped[Optional[str]] = mapped_column(
+        String(6), 
+        nullable=True,
+        comment="6-digit email verification code"
+    )
+    verification_code_expires_at: Mapped[Optional[datetime]] = mapped_column(
+        DateTime, 
+        nullable=True,
+        comment="Verification code expiration time"
+    )
+    verification_attempts: Mapped[int] = mapped_column(
+        Integer,
+        default=0,
+        comment="Failed verification attempts counter"
+    )
+    
     # ==========================================================================
     # Profile
     # ==========================================================================

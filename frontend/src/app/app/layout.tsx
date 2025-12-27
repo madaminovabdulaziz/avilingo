@@ -142,7 +142,7 @@ function SidebarNavItem({ item, isActive, isCollapsed }: SidebarNavItemProps) {
       >
         <div className="relative">
           <Icon className="w-5 h-5 flex-shrink-0" />
-          {item.badge && item.badge > 0 && isCollapsed && (
+          {isCollapsed && item.badge != null && item.badge > 0 && (
             <span className="absolute -top-1 -right-1 w-2 h-2 bg-primary rounded-full" />
           )}
         </div>
@@ -150,7 +150,7 @@ function SidebarNavItem({ item, isActive, isCollapsed }: SidebarNavItemProps) {
         {!isCollapsed && (
           <>
             <span className="flex-1 font-medium text-sm">{item.label}</span>
-            {item.badge && item.badge > 0 && (
+            {item.badge != null && item.badge > 0 && (
               <Badge variant="secondary" size="sm" className="text-xs">
                 {item.badge}
               </Badge>
@@ -184,7 +184,7 @@ function MobileNavItem({ item, isActive }: MobileNavItemProps) {
     >
       <div className="relative">
         <Icon className="w-5 h-5" />
-        {item.badge && item.badge > 0 && (
+        {item.badge != null && item.badge > 0 && (
           <span className="absolute -top-1 -right-1 w-2 h-2 bg-primary rounded-full" />
         )}
       </div>

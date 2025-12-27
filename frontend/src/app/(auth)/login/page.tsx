@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/auth-context';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -11,7 +12,8 @@ import { useToast } from '@/hooks/use-toast';
 import { Plane, Mail, Lock, Loader2, Eye, EyeOff } from 'lucide-react';
 
 export default function LoginPage() {
-  const { login, isLoading: authLoading } = useAuth();
+  const router = useRouter();
+  const { login, resendCode, isLoading: authLoading } = useAuth();
   const { toast } = useToast();
   
   const [email, setEmail] = useState('');
@@ -52,12 +54,30 @@ export default function LoginPage() {
         title: 'Welcome back!',
         description: 'You have successfully logged in.',
       });
-    } catch (error) {
-      toast({
-        title: 'Login failed',
-        description: error instanceof Error ? error.message : 'Invalid credentials',
-        variant: 'destructive',
-      });
+    } catch (error: any) {
+      // Check if it's an email not verified error
+      const errorMessage = error?.message || '';
+      if (errorMessage.includes('Email not verified') || errorMessage.includes('EMAIL_NOT_VERIFIED')) {
+        toast({
+          title: 'Email not verified',
+          description: 'Please verify your email to continue. Sending a new code...',
+        });
+        
+        // Resend verification code and redirect to verification page
+        try {
+          await resendCode(email);
+          router.push(`/verify-email?email=${encodeURIComponent(email)}`);
+        } catch {
+          // Even if resend fails, redirect to verification page
+          router.push(`/verify-email?email=${encodeURIComponent(email)}`);
+        }
+      } else {
+        toast({
+          title: 'Login failed',
+          description: error instanceof Error ? error.message : 'Invalid credentials',
+          variant: 'destructive',
+        });
+      }
     } finally {
       setIsSubmitting(false);
     }

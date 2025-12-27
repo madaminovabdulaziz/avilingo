@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/auth-context';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -41,6 +42,7 @@ interface FormErrors {
 }
 
 export default function RegisterPage() {
+  const router = useRouter();
   const { register, isLoading: authLoading } = useAuth();
   const { toast } = useToast();
   
@@ -114,17 +116,21 @@ export default function RegisterPage() {
     setIsSubmitting(true);
     
     try {
-      await register({
+      const response = await register({
         email: formData.email,
         password: formData.password,
         display_name: formData.displayName.trim(),
         native_language: formData.nativeLanguage || undefined,
         target_icao_level: formData.targetIcaoLevel,
       });
+      
       toast({
-        title: 'Welcome to AviLingo!',
-        description: 'Your account has been created successfully.',
+        title: 'Verification code sent!',
+        description: 'Please check your email for the verification code.',
       });
+      
+      // Redirect to verification page with email
+      router.push(`/verify-email?email=${encodeURIComponent(response.email)}`);
     } catch (error) {
       toast({
         title: 'Registration failed',

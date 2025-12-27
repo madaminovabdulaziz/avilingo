@@ -87,6 +87,30 @@ export interface ForgotPasswordRequest {
   email: string;
 }
 
+// Register response (email verification required)
+export interface RegisterResponse {
+  message: string;
+  email: string;
+}
+
+// Verify email request
+export interface VerifyEmailRequest {
+  email: string;
+  code: string;
+}
+
+// Resend code request
+export interface ResendCodeRequest {
+  email: string;
+}
+
+// Email not verified error detail
+export interface EmailNotVerifiedError {
+  message: string;
+  code: 'EMAIL_NOT_VERIFIED';
+  email: string;
+}
+
 // Auth context state
 export interface AuthState {
   user: UserDisplay | null;
@@ -98,7 +122,9 @@ export interface AuthState {
 // Auth context type
 export interface AuthContextType extends AuthState {
   login: (data: LoginRequest) => Promise<void>;
-  register: (data: RegisterRequest) => Promise<void>;
+  register: (data: RegisterRequest) => Promise<RegisterResponse>;
+  verifyEmail: (data: VerifyEmailRequest) => Promise<void>;
+  resendCode: (email: string) => Promise<void>;
   logout: () => Promise<void>;
   refreshToken: () => Promise<boolean>;
   clearError: () => void;

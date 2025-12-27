@@ -2,7 +2,9 @@
 Authentication API Routes
 
 Endpoints:
-- POST /auth/register - Create new user account
+- POST /auth/register - Create new user account (sends verification email)
+- POST /auth/verify-email - Verify email with 6-digit code
+- POST /auth/resend-code - Resend verification code
 - POST /auth/login - Authenticate and get tokens
 - POST /auth/refresh - Refresh access token
 - POST /auth/logout - Invalidate tokens
@@ -15,12 +17,16 @@ import logging
 
 from app.db.session import get_db
 from app.services.auth_service import AuthService
+from app.services.email_service import send_verification_email
 from app.schemas.auth import (
     LoginRequest,
     TokenResponse,
     TokenWithUser,
     RefreshRequest,
     RegisterRequest,
+    RegisterResponse,
+    VerifyEmailRequest,
+    ResendCodeRequest,
     ForgotPasswordRequest,
     LogoutRequest,
 )
@@ -29,6 +35,8 @@ from app.core.rate_limiter import (
     check_login_rate_limit,
     check_register_rate_limit,
     check_password_reset_rate_limit,
+    check_verify_email_rate_limit,
+    check_resend_code_rate_limit,
 )
 from app.core.security import get_current_user_id
 
@@ -43,10 +51,10 @@ router = APIRouter()
 
 @router.post(
     "/register", 
-    response_model=TokenWithUser,
+    response_model=RegisterResponse,
     status_code=status.HTTP_201_CREATED,
     summary="Register new user",
-    description="Create a new user account and return authentication tokens."
+    description="Create a new user account and send verification email."
 )
 async def register(
     request: Request,
@@ -58,8 +66,9 @@ async def register(
     
     - Validates email format and password strength
     - Checks for existing email
-    - Creates user with hashed password
-    - Returns access and refresh tokens
+    - Creates user with hashed password (unverified)
+    - Sends 6-digit verification code to email
+    - Returns confirmation message (no tokens until verified)
     
     Rate limited: 3 requests per minute per IP
     """
@@ -69,16 +78,87 @@ async def register(
     auth_service = AuthService(db)
     
     try:
-        user, tokens = auth_service.register_user(data)
+        user = auth_service.register_user(data)
     except ValueError as e:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=str(e)
         )
     
-    logger.info(f"New user registered: {user.email}")
+    # Send verification email
+    await send_verification_email(user.email, user.verification_code)
     
-    # Return tokens with user data
+    logger.info(f"New user registered (pending verification): {user.email}")
+    
+    return RegisterResponse(
+        message="Verification code sent to your email",
+        email=user.email
+    )
+
+
+# =============================================================================
+# Email Verification
+# =============================================================================
+
+@router.post(
+    "/verify-email",
+    response_model=TokenWithUser,
+    summary="Verify email address",
+    description="Verify email with 6-digit code and receive authentication tokens."
+)
+async def verify_email(
+    data: VerifyEmailRequest,
+    db: Session = Depends(get_db)
+):
+    """
+    Verify user's email with 6-digit code.
+    
+    - Validates the verification code
+    - Marks email as verified
+    - Returns access and refresh tokens
+    
+    Rate limited: 5 attempts per email per 15 minutes
+    """
+    # Rate limiting
+    await check_verify_email_rate_limit(data.email)
+    
+    auth_service = AuthService(db)
+    user, error = auth_service.verify_email(data.email, data.code)
+    
+    if not user:
+        # Determine appropriate status code
+        if error == "Verification code expired":
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=error
+            )
+        elif error == "Email already verified":
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=error
+            )
+        elif "Invalid verification code" in error:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=error
+            )
+        elif "Too many failed attempts" in error:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=error
+            )
+        else:
+            # User not found - use generic message for security
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Invalid verification request"
+            )
+    
+    # Generate tokens for verified user
+    tokens = auth_service._create_tokens(user.id)
+    
+    logger.info(f"Email verified: {user.email}")
+    
     return TokenWithUser(
         access_token=tokens.access_token,
         refresh_token=tokens.refresh_token,
@@ -87,6 +167,59 @@ async def register(
         refresh_expires_in=tokens.refresh_expires_in,
         user=UserResponse.model_validate(user)
     )
+
+
+# =============================================================================
+# Resend Verification Code
+# =============================================================================
+
+@router.post(
+    "/resend-code",
+    status_code=status.HTTP_200_OK,
+    summary="Resend verification code",
+    description="Request a new verification code to be sent to email."
+)
+async def resend_code(
+    data: ResendCodeRequest,
+    db: Session = Depends(get_db)
+):
+    """
+    Resend verification code to user's email.
+    
+    - Checks user exists and is not already verified
+    - Generates new 6-digit code
+    - Sends new verification email
+    
+    Rate limited: 3 requests per email per hour
+    """
+    # Rate limiting
+    await check_resend_code_rate_limit(data.email)
+    
+    auth_service = AuthService(db)
+    user, error = auth_service.resend_verification_code(data.email)
+    
+    if not user:
+        if error == "Email already verified":
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=error
+            )
+        else:
+            # User not found - use generic message for security
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Invalid request"
+            )
+    
+    # Send new verification email
+    await send_verification_email(user.email, user.verification_code)
+    
+    logger.info(f"Verification code resent to: {user.email[:3]}***")
+    
+    return {
+        "message": "New verification code sent",
+        "email": user.email
+    }
 
 
 # =============================================================================
@@ -108,6 +241,7 @@ async def login(
     Authenticate user and return tokens.
     
     - Validates credentials
+    - Checks if email is verified (returns 403 if not)
     - Updates last login timestamp
     - Returns access token (60 min) and refresh token (30 days)
     
@@ -117,9 +251,9 @@ async def login(
     await check_login_rate_limit(request)
     
     auth_service = AuthService(db)
-    result = auth_service.login(data.email, data.password)
+    user, tokens, error_code = auth_service.login(data.email, data.password)
     
-    if result is None:
+    if error_code == "INVALID_CREDENTIALS":
         # Log failed attempt (without sensitive data)
         logger.warning(f"Failed login attempt for email: {data.email[:3]}***")
         
@@ -129,7 +263,18 @@ async def login(
             headers={"WWW-Authenticate": "Bearer"},
         )
     
-    user, tokens = result
+    if error_code == "EMAIL_NOT_VERIFIED":
+        logger.warning(f"Login attempt by unverified user: {data.email[:3]}***")
+        
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail={
+                "message": "Email not verified",
+                "code": "EMAIL_NOT_VERIFIED",
+                "email": data.email
+            }
+        )
+    
     logger.info(f"User logged in: {user.email}")
     
     return TokenWithUser(

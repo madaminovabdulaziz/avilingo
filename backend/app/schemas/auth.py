@@ -169,15 +169,36 @@ class ResetPasswordRequest(BaseModel):
 # =============================================================================
 
 class VerifyEmailRequest(BaseModel):
-    """Schema for email verification."""
+    """Schema for email verification with 6-digit code."""
     
-    token: str = Field(..., min_length=1, description="Email verification token")
+    email: EmailStr = Field(..., description="User's email address")
+    code: str = Field(
+        ..., 
+        min_length=6, 
+        max_length=6, 
+        pattern=r'^\d{6}$',
+        description="6-digit verification code"
+    )
 
 
-class ResendVerificationRequest(BaseModel):
-    """Schema for resending verification email."""
+class ResendCodeRequest(BaseModel):
+    """Schema for resending verification code."""
     
-    email: EmailStr = Field(..., description="Email address to resend verification")
+    email: EmailStr = Field(..., description="Email address to resend verification code")
+
+
+class RegisterResponse(BaseModel):
+    """Schema for registration response (before email verification)."""
+    
+    message: str = Field(..., description="Success message")
+    email: str = Field(..., description="Email address where verification code was sent")
+
+
+class EmailNotVerifiedError(BaseModel):
+    """Schema for email not verified error response."""
+    
+    detail: str = Field(default="Email not verified")
+    code: str = Field(default="EMAIL_NOT_VERIFIED")
 
 
 # =============================================================================

@@ -79,9 +79,28 @@ class Settings(BaseSettings):
     USE_OPENAI_WHISPER_API: bool = False  # If True, use OpenAI API instead of local model
     
     # ==========================================================================
+    # Email (Resend)
+    # ==========================================================================
+    RESEND_API_KEY: str = ""
+    EMAIL_FROM: str = "AviLingo <noreply@avilingo.net>"
+    VERIFICATION_CODE_EXPIRE_MINUTES: int = 3
+    
+    # ==========================================================================
     # Rate Limiting
     # ==========================================================================
     RATE_LIMIT_LOGIN_PER_MINUTE: int = 5
+    
+    # ==========================================================================
+    # RevenueCat (In-App Purchases)
+    # ==========================================================================
+    REVENUECAT_API_KEY: str = ""  # RevenueCat API v1 key (starts with sk_)
+    REVENUECAT_WEBHOOK_AUTH_KEY: str = ""  # Shared secret for webhook verification
+    REVENUECAT_APP_ID: str = ""  # Your RevenueCat project/app identifier
+    
+    # Product Identifiers (configure in RevenueCat dashboard)
+    PREMIUM_MONTHLY_PRODUCT_ID: str = "avilingo_premium_monthly"
+    PREMIUM_YEARLY_PRODUCT_ID: str = "avilingo_premium_yearly"
+    LIFETIME_PRODUCT_ID: str = "avilingo_lifetime"
     
     class Config:
         env_file = ".env"

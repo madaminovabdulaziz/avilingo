@@ -741,6 +741,17 @@ export default function LandingPage() {
             <span className="text-lg sm:text-xl font-bold">AviLingo</span>
             <span className="text-gray-400 text-sm sm:text-base">{t.footer.tagline}</span>
           </div>
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8 mb-6">
+            <Link href="/terms-of-service" className="text-sm text-gray-400 hover:text-white transition-colors">
+              Terms of Service
+            </Link>
+            <Link href="/privacy-policy" className="text-sm text-gray-400 hover:text-white transition-colors">
+              Privacy Policy
+            </Link>
+            <Link href="/refund-policy" className="text-sm text-gray-400 hover:text-white transition-colors">
+              Refund Policy
+            </Link>
+          </div>
           <p className="text-center text-xs sm:text-sm text-gray-600">{t.footer.copyright}</p>
         </div>
       </footer>

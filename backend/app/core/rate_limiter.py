@@ -121,6 +121,14 @@ class RateLimitConfig:
     # Token refresh: 10 per minute
     REFRESH_MAX_REQUESTS = 10
     REFRESH_WINDOW_SECONDS = 60
+    
+    # Email verification: 5 attempts per 15 minutes per email
+    VERIFY_EMAIL_MAX_REQUESTS = 5
+    VERIFY_EMAIL_WINDOW_SECONDS = 900  # 15 minutes
+    
+    # Resend code: 3 per hour per email
+    RESEND_CODE_MAX_REQUESTS = 3
+    RESEND_CODE_WINDOW_SECONDS = 3600  # 1 hour
 
 
 # =============================================================================
@@ -220,5 +228,57 @@ async def check_password_reset_rate_limit(request: Request, email: str) -> None:
         raise HTTPException(
             status_code=status.HTTP_429_TOO_MANY_REQUESTS,
             detail="Too many password reset requests. Please try again later."
+        )
+
+
+async def check_verify_email_rate_limit(email: str) -> None:
+    """Check email verification rate limit: 5 attempts per 15 minutes per email."""
+    key = f"verify_email:{email.lower()}"
+    
+    is_limited, remaining = await rate_limiter.is_rate_limited(
+        key,
+        RateLimitConfig.VERIFY_EMAIL_MAX_REQUESTS,
+        RateLimitConfig.VERIFY_EMAIL_WINDOW_SECONDS
+    )
+    
+    if is_limited:
+        retry_after = await rate_limiter.get_retry_after(
+            key, 
+            RateLimitConfig.VERIFY_EMAIL_WINDOW_SECONDS
+        )
+        raise HTTPException(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+            detail=f"Too many verification attempts. Please try again in {retry_after // 60} minutes.",
+            headers={
+                "Retry-After": str(retry_after),
+                "X-RateLimit-Limit": str(RateLimitConfig.VERIFY_EMAIL_MAX_REQUESTS),
+                "X-RateLimit-Remaining": "0"
+            }
+        )
+
+
+async def check_resend_code_rate_limit(email: str) -> None:
+    """Check resend code rate limit: 3 per hour per email."""
+    key = f"resend_code:{email.lower()}"
+    
+    is_limited, remaining = await rate_limiter.is_rate_limited(
+        key,
+        RateLimitConfig.RESEND_CODE_MAX_REQUESTS,
+        RateLimitConfig.RESEND_CODE_WINDOW_SECONDS
+    )
+    
+    if is_limited:
+        retry_after = await rate_limiter.get_retry_after(
+            key, 
+            RateLimitConfig.RESEND_CODE_WINDOW_SECONDS
+        )
+        raise HTTPException(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+            detail=f"Too many resend requests. Please try again in {retry_after // 60} minutes.",
+            headers={
+                "Retry-After": str(retry_after),
+                "X-RateLimit-Limit": str(RateLimitConfig.RESEND_CODE_MAX_REQUESTS),
+                "X-RateLimit-Remaining": "0"
+            }
         )
 

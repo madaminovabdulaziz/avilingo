@@ -17,7 +17,7 @@ const inputVariants = cva(
         error:
           "border-destructive focus-visible:ring-2 focus-visible:ring-destructive text-destructive",
         aviation:
-          "h-11 rounded-xl border-border bg-card focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20 pl-10",
+          "h-11 rounded-xl border-border bg-card focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20",
       },
       inputSize: {
         default: "h-10 px-3 py-2",
@@ -44,12 +44,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     if (variant === "aviation" && icon) {
       return (
         <div className="relative">
-          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
+          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none">
             {icon}
           </div>
           <input
             type={type}
-            className={cn(inputVariants({ variant, inputSize }), className)}
+            className={cn(inputVariants({ variant, inputSize }), "pl-10", className)}
             ref={ref}
             {...props}
           />
@@ -57,14 +57,14 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       )
     }
 
-    // For aviation variant without icon, adjust padding
+    // For aviation variant without icon
     if (variant === "aviation") {
       return (
         <input
           type={type}
           className={cn(
             inputVariants({ variant, inputSize }),
-            "pl-3", // Override the pl-10 when no icon
+            "px-4",
             className
           )}
           ref={ref}

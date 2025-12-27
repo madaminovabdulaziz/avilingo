@@ -21,11 +21,15 @@ import type {
   AuthContextType,
   LoginRequest,
   RegisterRequest,
+  RegisterResponse,
+  VerifyEmailRequest,
   UserDisplay,
 } from '@/types/auth';
 import {
   loginApi,
   registerApi,
+  verifyEmailApi,
+  resendCodeApi,
   logoutApi,
   getCurrentUserApi,
   refreshTokenWithDedup,
@@ -61,7 +65,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const isAuthenticated = useMemo(() => !!user, [user]);
   
   // Routes that don't require authentication
-  const publicRoutes = ['/login', '/register', '/forgot-password', '/'];
+  const publicRoutes = ['/login', '/register', '/forgot-password', '/verify-email', '/'];
   const isPublicRoute = publicRoutes.some(route => pathname === route || pathname?.startsWith(route + '/'));
   
   // Routes that authenticated users should be redirected away from
@@ -169,14 +173,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }, [router]);
   
-  const register = useCallback(async (data: RegisterRequest) => {
+  const register = useCallback(async (data: RegisterRequest): Promise<RegisterResponse> => {
     setError(null);
     setIsLoading(true);
     
     try {
       const response = await registerApi(data);
-      setUser(toUserDisplay(response.user));
-      router.replace('/app/dashboard');
+      // Don't set user or redirect - need email verification first
+      // Return the response so the caller can redirect to verification page
+      return response;
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Registration failed';
       setError(message);
@@ -184,7 +189,40 @@ export function AuthProvider({ children }: AuthProviderProps) {
     } finally {
       setIsLoading(false);
     }
+  }, []);
+  
+  const verifyEmail = useCallback(async (data: VerifyEmailRequest) => {
+    setError(null);
+    setIsLoading(true);
+    
+    try {
+      const response = await verifyEmailApi(data);
+      setUser(toUserDisplay(response.user));
+      
+      // Redirect to stored destination or dashboard
+      const redirect = sessionStorage.getItem('auth_redirect');
+      sessionStorage.removeItem('auth_redirect');
+      router.replace(redirect || '/app/dashboard');
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Verification failed';
+      setError(message);
+      throw err;
+    } finally {
+      setIsLoading(false);
+    }
   }, [router]);
+  
+  const resendCode = useCallback(async (email: string) => {
+    setError(null);
+    
+    try {
+      await resendCodeApi(email);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to resend code';
+      setError(message);
+      throw err;
+    }
+  }, []);
   
   const logout = useCallback(async () => {
     try {
@@ -220,11 +258,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
       error,
       login,
       register,
+      verifyEmail,
+      resendCode,
       logout,
       refreshToken,
       clearError,
     }),
-    [user, isLoading, isAuthenticated, error, login, register, logout, refreshToken, clearError]
+    [user, isLoading, isAuthenticated, error, login, register, verifyEmail, resendCode, logout, refreshToken, clearError]
   );
   
   return (
