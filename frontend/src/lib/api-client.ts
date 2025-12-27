@@ -110,7 +110,8 @@ async function handleTokenRefresh(): Promise<boolean> {
   isRefreshing = true;
 
   try {
-    const success = await refreshTokenWithDedup();
+    const result = await refreshTokenWithDedup();
+    const success = result !== null;
     processQueue(success);
     return success;
   } catch (error) {
