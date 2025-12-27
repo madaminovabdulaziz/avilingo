@@ -17,7 +17,7 @@ import {
   type ProgressStats,
   type DailyProgressResponse,
   type AchievementListResponse,
-  type ActivityTimelineResponse,
+  type ActivityTimeline,
 } from '@/lib/api';
 import {
   Clock,
@@ -226,7 +226,7 @@ export default function ProgressPage() {
   const [stats, setStats] = useState<ProgressStats | null>(null);
   const [dailyProgress, setDailyProgress] = useState<DailyProgressResponse | null>(null);
   const [achievements, setAchievements] = useState<AchievementListResponse | null>(null);
-  const [activities, setActivities] = useState<ActivityTimelineResponse | null>(null);
+  const [activities, setActivities] = useState<ActivityTimeline | null>(null);
   
   const dateParams = useMemo(() => {
     const range = DATE_RANGES.find(r => r.value === dateRange);
