@@ -143,17 +143,18 @@ export function StaggerItem({ children, className }: { children: React.ReactNode
 // Animated Card (Hover Lift + Click Feedback)
 // =============================================================================
 
-interface AnimatedCardProps extends React.HTMLAttributes<HTMLDivElement> {
+interface AnimatedCardProps {
   children: React.ReactNode;
+  className?: string;
   disabled?: boolean;
 }
 
-export function AnimatedCard({ children, className, disabled, ...props }: AnimatedCardProps) {
+export function AnimatedCard({ children, className, disabled }: AnimatedCardProps) {
   const reducedMotion = useReducedMotion();
 
   if (reducedMotion || disabled) {
     return (
-      <div className={className} {...props}>
+      <div className={className}>
         {children}
       </div>
     );
@@ -164,7 +165,6 @@ export function AnimatedCard({ children, className, disabled, ...props }: Animat
       className={className}
       whileHover={{ scale: 1.02, y: -4, transition: transitions.gentle }}
       whileTap={{ scale: 0.98, transition: transitions.fast }}
-      {...props}
     >
       {children}
     </motion.div>
