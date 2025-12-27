@@ -118,7 +118,7 @@ export interface UploadUrlResponse {
  */
 export function useSpeakingScenarios(filters?: SpeakingFiltersRequest) {
   return useQuery({
-    queryKey: queryKeys.speaking.scenarios(filters as Record<string, unknown>),
+    queryKey: queryKeys.speaking.scenarios(filters),
     queryFn: () => api.get<SpeakingScenariosResponse>('/speaking/scenarios', {
       params: filters as Record<string, string | number | undefined>,
     }),

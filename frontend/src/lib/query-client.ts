@@ -24,7 +24,7 @@ export const queryKeys = {
   vocabulary: {
     all: ['vocabulary'] as const,
     categories: () => [...queryKeys.vocabulary.all, 'categories'] as const,
-    terms: (filters?: Record<string, unknown>) => 
+    terms: (filters?: object) => 
       [...queryKeys.vocabulary.all, 'terms', filters] as const,
     term: (id: string) => [...queryKeys.vocabulary.all, 'term', id] as const,
     reviewQueue: () => [...queryKeys.vocabulary.all, 'reviewQueue'] as const,
@@ -34,7 +34,7 @@ export const queryKeys = {
   // Listening
   listening: {
     all: ['listening'] as const,
-    exercises: (filters?: Record<string, unknown>) => 
+    exercises: (filters?: object) => 
       [...queryKeys.listening.all, 'exercises', filters] as const,
     exercise: (id: string) => [...queryKeys.listening.all, 'exercise', id] as const,
     filters: () => [...queryKeys.listening.all, 'filters'] as const,
@@ -44,7 +44,7 @@ export const queryKeys = {
   // Speaking
   speaking: {
     all: ['speaking'] as const,
-    scenarios: (filters?: Record<string, unknown>) => 
+    scenarios: (filters?: object) => 
       [...queryKeys.speaking.all, 'scenarios', filters] as const,
     scenario: (id: string) => [...queryKeys.speaking.all, 'scenario', id] as const,
     submission: (id: string) => [...queryKeys.speaking.all, 'submission', id] as const,
